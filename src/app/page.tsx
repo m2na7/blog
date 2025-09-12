@@ -1,7 +1,6 @@
 import Link from 'next/link'
 
 import PostCard from '@/components/post-card'
-import { BLOG_CONFIG } from '@/constants/config'
 import { getAllPosts } from '@/lib/posts'
 
 export default function HomePage() {
@@ -9,28 +8,26 @@ export default function HomePage() {
   const recentPosts = allPosts.slice(0, 6)
 
   return (
-    <div className="space-y-12">
-      <section className="space-y-4 py-12 text-center">
-        <h1 className="text-4xl font-bold text-gray-900 md:text-5xl dark:text-white">
-          m2na's dev blog
-        </h1>
-        <p className="mx-auto max-w-2xl text-xl leading-relaxed text-gray-600 dark:text-gray-300">
-          {BLOG_CONFIG.description}
-        </p>
-        <p className="text-gray-500 dark:text-gray-400">기록하고 공유해요.</p>
-      </section>
-
+    <div>
       {recentPosts.length > 0 && (
-        <section className="space-y-6">
+        <section className="space-y-[6.4px]">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-              최신 포스트
-            </h2>
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+                최신 포스트
+              </h2>
+              <p className="mt-4 text-gray-600 dark:text-gray-400">
+                최근에 작성한 포스트예요.
+              </p>
+            </div>
             <Link
               href="/posts"
-              className="font-medium text-blue-600 transition-colors hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200"
+              className="group flex items-center space-x-2 rounded-full border border-gray-200 bg-white px-4 py-2 font-medium text-gray-700 transition-all hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
             >
-              전체 보기 →
+              <span>전체 보기</span>
+              <span className="transition-transform group-hover:translate-x-1">
+                →
+              </span>
             </Link>
           </div>
 

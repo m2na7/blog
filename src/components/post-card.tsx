@@ -21,7 +21,7 @@ export default function PostCard({ post, className }: PostCardProps) {
     >
       <Link href={`/posts/${post.slug}`} className="block p-6">
         {/* 포스트 제목 */}
-        <h2 className="mb-3 line-clamp-2 text-xl font-semibold text-gray-900 transition-colors hover:text-blue-600 dark:text-white dark:hover:text-blue-400">
+        <h2 className="mb-3 line-clamp-2 text-xl font-semibold text-gray-900 transition-colors hover:text-gray-700 dark:text-white dark:hover:text-gray-300">
           {post.title}
         </h2>
 
@@ -47,7 +47,7 @@ export default function PostCard({ post, className }: PostCardProps) {
           </div>
 
           {/* 읽기 더보기 화살표 */}
-          <div className="group flex items-center text-blue-600 dark:text-blue-400">
+          <div className="group flex items-center text-gray-600 dark:text-gray-400">
             <span className="mr-1 font-medium">읽기</span>
             <ChevronRight className="h-4 w-4 transform transition-transform group-hover:translate-x-1" />
           </div>

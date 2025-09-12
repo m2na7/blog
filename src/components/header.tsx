@@ -1,16 +1,17 @@
 'use client'
 
 import Link from 'next/link'
-import { BLOG_CONFIG } from '@/constants/config'
+
 import ThemeToggle from '@/components/theme-toggle'
+import { BLOG_CONFIG } from '@/constants/config'
 
 export default function Header() {
   return (
-    <header className="w-full bg-transparent">
-      <div className="mx-auto flex h-16 max-w-2xl items-center justify-between">
+    <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md dark:bg-slate-900/80">
+      <div className="mx-auto flex h-16 max-w-2xl items-center justify-between border-b border-gray-200 px-4 dark:border-gray-800">
         <Link
           href="/"
-          className="text-xl font-bold text-gray-900 transition-colors hover:text-blue-600 dark:text-white dark:hover:text-blue-400"
+          className="text-xl font-bold text-gray-900 transition-colors hover:text-gray-700 dark:text-white dark:hover:text-gray-300"
         >
           {BLOG_CONFIG.title}
         </Link>
@@ -21,7 +22,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="font-medium text-gray-700 transition-colors hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
+                className="relative font-medium text-gray-700 transition-colors hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
               >
                 {item.name}
               </Link>

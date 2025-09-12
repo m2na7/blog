@@ -1,5 +1,6 @@
-import type { Metadata } from 'next'
 import { type ReactNode } from 'react'
+
+import type { Metadata } from 'next'
 
 import Footer from '@/components/footer'
 import Header from '@/components/header'
@@ -38,7 +39,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-white antialiased dark:bg-slate-900">
         <div className="flex min-h-screen flex-col">
           <Header />
-          <main className="mx-auto w-full max-w-2xl flex-1 px-2 py-8">
+          <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-8">
             {children}
           </main>
           <Footer />
