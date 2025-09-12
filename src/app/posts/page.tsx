@@ -3,6 +3,7 @@ import { Suspense } from 'react'
 import { Metadata } from 'next'
 
 import PostCard from '@/components/post-card'
+import Title from '@/components/title'
 import { BLOG_CONFIG } from '@/constants/config'
 import { getPaginatedPosts } from '@/lib/posts'
 
@@ -28,9 +29,7 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
   return (
     <div className="space-y-8">
       <header className="space-y-4">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-          Posts
-        </h1>
+        <Title size="lg">Posts</Title>
         <p className="text-gray-600 dark:text-gray-300">
           총 {pagination.totalPosts}개의 포스트가 있습니다.
         </p>

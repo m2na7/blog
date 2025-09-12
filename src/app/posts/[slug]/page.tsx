@@ -5,6 +5,7 @@ import { Metadata } from 'next'
 
 import { mdxComponents } from '@/components/mdx-components'
 import { MDXContent } from '@/components/mdx-contents'
+import Title from '@/components/title'
 import { BLOG_CONFIG } from '@/constants/config'
 import { getAllPosts, getPostBySlug } from '@/lib/posts'
 import { formatDate } from '@/utils/date'
@@ -75,9 +76,7 @@ export default async function PostPage({ params }: PostPageProps) {
       {/* 포스트 헤더 */}
       <header className="mb-8 space-y-6 border-b border-gray-200 pb-8 dark:border-slate-700">
         <div className="space-y-4">
-          <h1 className="text-3xl leading-tight font-bold text-gray-900 lg:text-4xl dark:text-white">
-            {post.title}
-          </h1>
+          <Title size="xl">{post.title}</Title>
 
           {post.description && (
             <p className="text-xl leading-relaxed text-gray-600 dark:text-gray-300">

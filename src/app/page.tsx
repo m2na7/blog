@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import PostCard from '@/components/post-card'
+import Title from '@/components/title'
 import { getAllPosts } from '@/lib/posts'
 
 export default function HomePage() {
@@ -13,9 +14,7 @@ export default function HomePage() {
         <section className="space-y-[6.4px]">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-                최신 포스트
-              </h2>
+              <Title size="lg">최신 포스트</Title>
               <p className="mt-4 text-gray-600 dark:text-gray-400">
                 최근에 작성한 포스트예요.
               </p>

@@ -6,10 +6,6 @@ import { Sun, Moon } from 'lucide-react'
 
 import { cn } from '@/utils/cn'
 
-/**
- * 다크모드 토글 컴포넌트
- * 라이트/다크 모드 간 전환
- */
 export default function ThemeToggle({ className }: { className?: string }) {
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
   const [mounted, setMounted] = useState(false)
@@ -17,12 +13,10 @@ export default function ThemeToggle({ className }: { className?: string }) {
   useEffect(() => {
     setMounted(true)
 
-    // 저장된 테마 설정 불러오기
     const savedTheme =
       (localStorage.getItem('theme') as 'light' | 'dark') || 'light'
     setTheme(savedTheme)
 
-    // 초기 테마 적용
     applyTheme(savedTheme)
 
     console.log(
