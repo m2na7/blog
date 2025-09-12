@@ -1,0 +1,49 @@
+import type { Metadata } from 'next'
+import { type ReactNode } from 'react'
+
+import Footer from '@/components/footer'
+import Header from '@/components/header'
+
+import '@/styles/global.css'
+
+export const metadata: Metadata = {
+  title: {
+    default: 'm2na',
+    template: '%s | m2na',
+  },
+  description: "m2na's blog",
+  openGraph: {
+    type: 'website',
+    locale: 'ko_KR',
+    title: 'm2na',
+    url: 'https://m2na.dev',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+}
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: ReactNode
+}>) {
+  return (
+    <html lang="ko" className="scroll-smooth">
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
+      <body className="min-h-screen bg-white antialiased dark:bg-slate-900">
+        <div className="flex min-h-screen flex-col">
+          <Header />
+          <main className="mx-auto w-full max-w-2xl flex-1 px-2 py-8">
+            {children}
+          </main>
+          <Footer />
+        </div>
+      </body>
+    </html>
+  )
+}

@@ -1,0 +1,149 @@
+@import 'tailwindcss';
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+
+@theme {
+  --default-transition-duration: 150ms;
+
+  --color-brand-primary: #3b82f6;
+  --color-brand-secondary: #8b5cf6;
+
+  --font-family-sans:
+    'Pretendard Variable', 'Pretendard', system-ui, -apple-system, sans-serif;
+  --font-family-mono: 'Fira Code', 'Consolas', monospace;
+
+  --max-width-blog: 672px;
+
+  --animate-fade-in: fadeIn 0.5s ease-in-out;
+  --animate-slide-up: slideUp 0.3s ease-out;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    0% {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  --breakpoint-xs: 475px;
+}
+
+@layer base {
+  :root {
+    --min-width: 375px;
+    --max-width: 672px;
+    --brand-primary: #3b82f6;
+    --brand-secondary: #8b5cf6;
+  }
+
+  html {
+    font-family: var(--font-family-sans);
+    line-height: 1.8;
+    scroll-behavior: smooth;
+    color: rgb(15 23 42);
+    overflow-y: scroll;
+  }
+
+  body {
+    font-family: var(--font-family-sans);
+    line-height: 1.8;
+    width: 100%;
+    color: rgb(15 23 42);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  p {
+    margin: 0 0 1.6rem 0;
+  }
+
+  code {
+    font-family: var(--font-family-mono);
+    background: rgb(241 245 249);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.4rem;
+    font-size: 0.9em;
+  }
+
+  pre code {
+    background: none;
+    padding: 0;
+  }
+
+  pre {
+    background: rgb(15 23 42);
+    color: rgb(241 245 249);
+    padding: 1.6rem;
+    border-radius: 0.8rem;
+    overflow-x: auto;
+    margin: 1.6rem 0;
+  }
+
+  img {
+    border-radius: 0.8rem;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .prose img + em {
+    display: block;
+    text-align: center;
+    font-size: 0.875rem;
+    color: rgb(100 116 139);
+    margin-top: 0.5rem;
+  }
+}
+
+html.dark {
+  background-color: rgb(15 23 42) !important;
+  color: rgb(241 245 249) !important;
+}
+
+html.dark body {
+  background-color: rgb(15 23 42) !important;
+  color: rgb(241 245 249) !important;
+}
+
+html.dark code {
+  background: rgb(30 41 59) !important;
+  color: rgb(226 232 240) !important;
+}
+
+html.dark pre {
+  background: rgb(15 23 42) !important;
+  color: rgb(241 245 249) !important;
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: var(--animate-fade-in);
+  }
+
+  .animate-slide-up {
+    animation: var(--animate-slide-up);
+  }
+}
