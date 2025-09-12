@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 
 import { Metadata } from 'next'
 
-import PostCard from '@/components/post-card'
+import PostListItem from '@/components/post-list-item'
 import Title from '@/components/title'
 import { BLOG_CONFIG } from '@/constants/config'
 import { getPaginatedPosts } from '@/lib/posts'
@@ -35,9 +35,9 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
         </p>
       </header>
       <Suspense fallback={<PostsLoading />}>
-        <div className="space-y-6">
+        <div className="divide-y divide-gray-100 dark:divide-gray-800">
           {posts.map((post) => (
-            <PostCard key={post.slug} post={post} />
+            <PostListItem key={post.slug} post={post} />
           ))}
         </div>
       </Suspense>
@@ -47,19 +47,21 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
 
 function PostsLoading() {
   return (
-    <div className="space-y-6">
+    <div className="divide-y divide-gray-100 dark:divide-gray-800">
       {[...Array(6)].map((_, i) => (
-        <div
-          key={i}
-          className="animate-pulse rounded-2xl border border-gray-200 bg-white p-6"
-        >
-          <div className="space-y-3">
-            <div className="h-6 w-3/4 rounded bg-gray-200"></div>
-            <div className="h-4 w-full rounded bg-gray-200"></div>
-            <div className="h-4 w-2/3 rounded bg-gray-200"></div>
-            <div className="flex space-x-2 pt-2">
-              <div className="h-6 w-16 rounded-full bg-gray-200"></div>
-              <div className="h-6 w-20 rounded-full bg-gray-200"></div>
+        <div key={i} className="animate-pulse py-6">
+          <div className="flex items-start justify-between gap-6">
+            <div className="min-w-0 flex-1 space-y-3">
+              <div className="h-6 w-3/4 rounded bg-gray-200 dark:bg-gray-700"></div>
+              <div className="h-4 w-full rounded bg-gray-200 dark:bg-gray-700"></div>
+              <div className="h-4 w-2/3 rounded bg-gray-200 dark:bg-gray-700"></div>
+              <div className="flex space-x-2">
+                <div className="h-6 w-16 rounded bg-gray-200 dark:bg-gray-700"></div>
+                <div className="h-6 w-20 rounded bg-gray-200 dark:bg-gray-700"></div>
+              </div>
+            </div>
+            <div className="flex-shrink-0">
+              <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-700"></div>
             </div>
           </div>
         </div>

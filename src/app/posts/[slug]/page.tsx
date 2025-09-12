@@ -76,10 +76,10 @@ export default async function PostPage({ params }: PostPageProps) {
       {/* 포스트 헤더 */}
       <header className="mb-8 space-y-6 border-b border-gray-200 pb-8">
         <div className="space-y-4">
-          <Title size="xl">{post.title}</Title>
+          <Title size="lg">{post.title}</Title>
 
           {post.description && (
-            <p className="text-xl leading-relaxed text-gray-600 dark:text-gray-300">
+            <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
               {post.description}
             </p>
           )}
