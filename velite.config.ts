@@ -46,13 +46,12 @@ export default defineConfig({
   collections: {
     posts: {
       name: 'Post',
-      pattern: 'posts/**/*.mdx',
+      pattern: 'posts/**/index.mdx',
       schema: s
         .object({
           title: s.string().max(99),
           date: s.isodate(),
           description: s.string().max(999),
-          tags: s.array(s.string()),
           draft: s.boolean().default(false),
           image: s.string().optional(),
           slug: s.slug('posts'),
