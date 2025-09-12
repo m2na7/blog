@@ -1,0 +1,143 @@
+---
+title: Protected Route로 라우트 보호하기
+description: Protected Route로 인증이 필요한 페이지를 보호하는 방법에 대해서 작성했어요.
+author: 강민하
+date: '2024-11-12'
+slug: 'protected-route'
+---
+
+![thumbnail](./assets/thumbnail.webp)
+
+## 1. Protected Route란?
+
+로그인/회원가입 기능이 있다면, 인증되지 않은 사용자로부터 보호해야 하는 페이지가 생기기 마련이에요.
+
+예를들면 게시물 작성 페이지, 마이페이지, 관리자 페이지 등이 있어요.
+
+해당 페이지로 접근하고자 하면 로그인이 되어있는지(토큰이 있는지) 확인해 보호하는 것이 필수에요.
+
+React Router를 활용해 **Protected Route 컴포넌트**를 만들고, 이를 통해 **인증이 필요한 페이지를 보호**하면 사용자 인증 상태에 따라 접근을 제어할 수 있어요.
+
+```tsx
+// ProtectedRoute.tsx
+import { Navigate, Outlet } from 'react-router-dom'
+
+interface ProtectedRouteProps {
+  protect?: boolean
+  children?: React.ReactNode
+}
+
+const ProtectedRoute = ({ protect = false, children }: ProtectedRouteProps) => {
+  // 로그인 여부를 저장
+  const isLoggedIn = !!sessionStorage.getItem(ACCESS_TOKEN_KEY)
+
+  if (protect && !isLoggedIn) {
+    // 보호된 페이지 && 로그인되지 않은 상태면 -> 보호 필요
+    // -> 로그인 페이지로 이동시킴
+    // replace -> 사용자가 뒤로가기를 눌러도 다시 보호된 페이지로 돌아갈 수 없음
+    return <Navigate to="/login" replace />
+  }
+
+  // 보호 페이지 조건에 맞는 경우에만 children 또는 Outlet 렌더링
+  return children ? <>{children}</> : <Outlet />
+}
+
+export default ProtectedRoute
+```
+- **`protect`**: 보호 페이지 여부를 나타내는 boolean 속성
+- **`children`**: 보호할 컴포넌트 (선택사항)
+- **`redirectTo`**: 리다이렉트할 경로 (기본값: '/login')
+- **`replace`**: 히스토리 스택을 대체하여 뒤로가기 버튼을 통해 이전 페이지로 돌아갈 수 없게 함
+
+이런 식으로 ProtectedRoute 컴포넌트를 구성할 수 있어요.
+<br />
+쉽게 생각하면, **로그인이 안되어있는데 로그인이 필요한 페이지로 접근하면 로그인 페이지로 리다이렉트**하는 방식이에요.
+
+1. **인증 상태 확인**: `isLoggedIn()` 함수로 토큰 유효성 검사
+2. **조건부 리다이렉트**: 인증 상태에 따라 적절한 페이지로 이동
+<br />
+추가적으로 보호가 필요하지 않은 페이지에서 보호가 필요한 페이지(로그인, 회원가입)로 접근하려고 할 때의 접근도 보호할 수 있어요.
+
+```tsx
+  if (!protect && isLoggedIn) {
+    return <Navigate to='/main' replace />;
+  }
+```
+
+## 2. 라우터에 ProtectedRoute 적용하기
+
+이제 ProtectedRoute 컴포넌트를 생성했으니, 실제로 적용해볼게요.
+
+```tsx
+import ProtectedRoute from './ProtectedRoute'
+
+const createProtectedRoute = (protect: boolean, Component: React.ReactNode) => (
+  <ProtectedRoute protect={protect}>{Component}</ProtectedRoute>
+)
+```
+
+> createProtectedRoute는 protect 속성과 Component를 인자로 받아 ProtectedRoute를 설정하는 헬퍼 함수예요.
+> 헬퍼 함수를 이용하면 반복적인 설정을 줄이고, 코드 가독성을 높일 수 있어요.
+
+```tsx
+// Router.tsx
+
+const Router = () => (
+  <RouterProvider
+    router={createBrowserRouter([
+      {
+        element: <Layout />,
+        children: [
+          {
+            path: '/',
+            element: <Navigate to="/login" replace />,
+          },
+          {
+            path: '/login',
+            element: createProtectedRoute(false, <Login />),
+          },
+          {
+            path: '/signup',
+            element: createProtectedRoute(false, <Signup />),
+          },
+        ],
+      },
+      {
+        element: <MyPageLayout />,
+        path: '/mypage',
+        children: [
+          {
+            path: 'hobby',
+            element: createProtectedRoute(true, <Hobby />),
+          },
+          {
+            path: 'info',
+            element: createProtectedRoute(true, <MyInfo />),
+          },
+        ],
+      },
+    ])}
+  />
+)
+
+export default Router
+```
+
+로그인과 회원가입이 필요한 페이지는 보호할 필요가 없으니, protect를 false로 설정해요.
+
+이 외의 페이지는 우리가 보호해야할 페이지이니 true로 설정해요.
+
+```tsx
+{
+  path: '/login',
+  element: (
+    <ProtectedRoute protect={false}>
+      <Login />
+    </ProtectedRoute>
+  ),
+},
+```
+
+헬퍼 함수 없이는 이런 식으로 구현할 수 있어요.
+
+Protected Route를 잘 사용하면 우리는 사용자의 인증 상태에 따라서 올바른 페이지로 접근할 수 있도록 설정하고, 로그인이 필요한 페이지에서는 접근을 차단하는 구조를 생성할 수 있어요.
