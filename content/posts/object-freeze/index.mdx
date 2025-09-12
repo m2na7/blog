@@ -1,0 +1,152 @@
+---
+title: Object.freeze() vs Object.seal()
+description: Object.freeze()와 Object.seal()의 차이점과 사용 방법 그리고 deepFreeze 구현 방법에 대해서 작성했어요.
+author: 강민하
+date: '2024-10-29'
+slug: 'object-freeze'
+tags: ['JavaScript', 'Object.freeze', 'Object.seal', 'Immutable', 'Deep Freeze']
+---
+
+![thumbnail](./assets/thumbnail.webp)
+
+JS의 객체는 기본적으로 변경 가능한(mutable) 데이터 구조입니다. 즉, 객체의 속성에 대한 추가, 수정, 삭제가 자유롭다는 것을 의미해요.
+
+하지만, 필요에 따라 객체를 불변(immutable)으로 만들어야 할 때가 있어요.
+
+예를 들면, 설정 관련 데이터라던가 사용자에게 보내는 메세지 등등 **데이터의 무결성을 보장**해야할 때 객체를 불변으로 만들어야 해요.
+
+> **_var,let 말고 const 쓰면 해결되는거 아닌가요?_**
+
+우선 `const`로 선언된 변수는 재할당이 불가능해요.
+
+하지만 객체와 배열같은 참조형 데이터에서는 값이 훅훅 변할 수 있어요.
+
+```javascript
+const number = 42
+
+number = 50 // 오류 발생: Assignment to constant variable.
+```
+
+원시 데이터 타입(`number`, `string`, `boolean`, ...)을 `const`로 선언하면 다른 값을 재할당할 수 없어요.
+
+```javascript
+const person = {
+  name: 'Minha',
+  age: 25,
+}
+
+person.age = 21 // 수정 가능
+console.log(person.age) // 21
+
+person.city = 'Seoul' // 추가 가능
+console.log(person.city) // 'Seoul'
+```
+
+하지만 객체를 `const`로 선언할 경우, 객체의 속성을 변경할 수 있어요. 즉 `const`가 **불변성을 제공하지는 않습니다.**
+
+**_그러면 불변성은 어떻게 보장하죠?_**
+
+## ❄️ Object.freeze()
+
+`Object.freeze()`메서드를 사용하면 객체의 속성을 추가, 삭제, 수정할 수 없게 만들어요.
+
+```javascript
+const person = {
+  name: 'Minha',
+  age: 25,
+}
+
+Object.freeze(person)
+
+person.age = 26 // 수정 불가
+console.log(person.age) // 25
+
+person.city = 'Seoul' // 추가 불가
+console.log(person.city) // undefined
+```
+
+위와 같이 `Object.freeze()`메서드는 객체를 동결하여 해당 객체의 속성을 변경할 수 없도록 해요.
+
+## ❄️ Object.seal()
+
+`Object.seal()`메서드도 불변성을 다루는 메서드예요.
+
+편지지에서 봉인의 표시로 붙이는 종이라는 뜻인 seal 처럼 해당 메서드는 객체를 봉인해 새로운 속성을 추가할 수 없게 해요.  
+하지만 `Object.freeze()`와는 달리 **기존 속성의 수정이 가능**해요!
+
+```javascript
+const person = {
+  name: 'Minha',
+  age: 25,
+}
+
+Object.seal(person)
+
+person.age = 21 // 수정 가능
+console.log(person.age) // 21
+
+person.city = 'Seoul' // 추가 불가
+console.log(person.city) // undefined
+```
+
+하지만... **두 메서드가 완벽한 불변성을 제공하지는 않아요.**  
+`Object.seal()`과 `Object.freeze()` 모두 **얕은 동결**만 수행하기 때문에 **중첩된 객체의 속성에 대해서는 변경이 가능**해요.
+
+```javascript
+const person = {
+  name: 'Minha',
+  age: 25,
+  address: {
+    city: 'Seoul',
+    country: 'Korea',
+  },
+}
+
+// 객체를 동결
+Object.freeze(person)
+
+// 중첩된 객체의 속성 수정 시도
+person.address.city = 'Busan' // 수정 가능
+console.log(person.address.city) // "Busan"
+```
+
+`address`안에 중첩된 `city` 속성은 동결이 되지 않았고, 수정이 가능한걸 볼 수 있어요.
+
+## ❄️ 완전한 불변, deepFreeze
+
+중첩된 객체까지 모두 동결해야하는 상황이라면 **deepFreeze(깊은 동결)**을 구현해야 해요.
+
+```javascript
+function deepFreeze(object) {
+  const propNames = Object.getOwnPropertyNames(object)
+
+  for (let name of propNames) {
+    const value = object[name]
+    if (value && typeof value === 'object') {
+      deepFreeze(value)
+    }
+  }
+
+  return Object.freeze(object)
+}
+
+// 사용 예
+const person = {
+  name: 'Minha',
+  address: {
+    city: 'Seoul',
+    country: 'Korea',
+  },
+}
+
+deepFreeze(person)
+
+person.address.city = 'Busan' // 무시됨
+console.log(person.address.city) // "Seoul"
+```
+
+`deepFreeze()`함수를 사용하면 중첩된 객체까지 모두 동결되는걸 확인할 수 있어요!
+
+중첩된 객체를 동결해야 한다면 deepFreeze 사용을 고려해보고,
+
+외에는 Object.freeze()와 Object.seal()을 상황에 맞게 잘 사용한다면 객체의 불변성을 보장하며, 예기치 않은 오류를 방지할 수 있어요.
