@@ -15,7 +15,7 @@ export default function PostListItem({ post, className }: PostListItemProps) {
   return (
     <article
       className={cn(
-        'group border-b border-gray-100 px-2 py-6 transition-colors hover:bg-gray-50/50 dark:border-gray-800 dark:hover:bg-gray-800/30',
+        'group border-b border-gray-300 px-2 py-6 transition-colors hover:bg-gray-50/50 dark:border-gray-800 dark:hover:bg-gray-800/30',
         className
       )}
     >

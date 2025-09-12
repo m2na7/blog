@@ -14,8 +14,8 @@ interface PostsPageProps {
 }
 
 export const metadata: Metadata = {
-  title: '포스트',
-  description: `${BLOG_CONFIG.title}의 모든 포스트를 확인해보세요.`,
+  title: 'Posts',
+  description: `${BLOG_CONFIG.title}의 Posts`,
 }
 
 export default async function PostsPage({ searchParams }: PostsPageProps) {
@@ -31,7 +31,7 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
       <header className="space-y-4">
         <Title size="lg">Posts</Title>
         <p className="text-gray-600 dark:text-gray-300">
-          총 {pagination.totalPosts}개의 포스트가 있습니다.
+          총 {pagination.totalPosts}개의 게시물이 있습니다.
         </p>
       </header>
       <Suspense fallback={<PostsLoading />}>
