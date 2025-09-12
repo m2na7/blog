@@ -74,7 +74,7 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     <article>
       {/* 포스트 헤더 */}
-      <header className="mb-8 space-y-6 border-b border-gray-200 pb-8 dark:border-slate-700">
+      <header className="mb-8 space-y-6 border-b border-gray-200 pb-8">
         <div className="space-y-4">
           <Title size="xl">{post.title}</Title>
 
@@ -87,7 +87,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
         {/* 메타 정보 */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400">
+          <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-300">
             <time dateTime={post.date} className="flex items-center">
               <Calendar className="mr-1.5 h-4 w-4" />
               {formatDate(post.date)}

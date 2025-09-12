@@ -14,14 +14,14 @@ export default function HomePage() {
         <section className="space-y-[6.4px]">
           <div className="flex items-center justify-between">
             <div>
-              <Title size="lg">최신 포스트</Title>
+              <Title size="lg">최근 포스트</Title>
               <p className="mt-4 text-gray-600 dark:text-gray-400">
                 최근에 작성한 포스트예요.
               </p>
             </div>
             <Link
               href="/posts"
-              className="group flex items-center space-x-2 rounded-full border border-gray-200 bg-white px-4 py-2 font-medium text-gray-700 transition-all hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+              className="group flex items-center space-x-2 rounded-full border border-gray-200 bg-white px-4 py-2 font-medium text-gray-700 transition-all hover:bg-gray-50"
             >
               <span>전체 보기</span>
               <span className="transition-transform group-hover:translate-x-1">

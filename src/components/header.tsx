@@ -7,7 +7,7 @@ import { BLOG_CONFIG } from '@/constants/config'
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md dark:bg-slate-900/80">
+    <header className="sticky top-0 z-50 w-full backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-2xl items-center justify-between border-b border-gray-200 px-4 dark:border-gray-800">
         <Link
           href="/"

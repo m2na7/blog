@@ -51,15 +51,15 @@ function PostsLoading() {
       {[...Array(6)].map((_, i) => (
         <div
           key={i}
-          className="animate-pulse rounded-2xl border border-gray-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-800"
+          className="animate-pulse rounded-2xl border border-gray-200 bg-white p-6"
         >
           <div className="space-y-3">
-            <div className="h-6 w-3/4 rounded bg-gray-200 dark:bg-slate-700"></div>
-            <div className="h-4 w-full rounded bg-gray-200 dark:bg-slate-700"></div>
-            <div className="h-4 w-2/3 rounded bg-gray-200 dark:bg-slate-700"></div>
+            <div className="h-6 w-3/4 rounded bg-gray-200"></div>
+            <div className="h-4 w-full rounded bg-gray-200"></div>
+            <div className="h-4 w-2/3 rounded bg-gray-200"></div>
             <div className="flex space-x-2 pt-2">
-              <div className="h-6 w-16 rounded-full bg-gray-200 dark:bg-slate-700"></div>
-              <div className="h-6 w-20 rounded-full bg-gray-200 dark:bg-slate-700"></div>
+              <div className="h-6 w-16 rounded-full bg-gray-200"></div>
+              <div className="h-6 w-20 rounded-full bg-gray-200"></div>
             </div>
           </div>
         </div>
