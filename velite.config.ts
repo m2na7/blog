@@ -54,6 +54,7 @@ export default defineConfig({
           description: s.string().max(999),
           draft: s.boolean().default(false),
           image: s.string().optional(),
+          thumbnail: s.image().optional(),
           slug: s.slug('posts'),
           metadata: s.metadata(),
           excerpt: s.excerpt(),
