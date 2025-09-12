@@ -2,12 +2,12 @@ import Link from 'next/link'
 
 import { Calendar, Clock, ChevronRight } from 'lucide-react'
 
-import { PostData } from '@/lib/posts'
+import type { PostSummary } from '@/lib/posts'
 import { cn } from '@/utils/cn'
 import { formatDate } from '@/utils/date'
 
 interface PostCardProps {
-  post: Omit<PostData, 'content'>
+  post: PostSummary
   className?: string
 }
 
@@ -38,10 +38,10 @@ export default function PostCard({ post, className }: PostCardProps) {
               {formatDate(post.date)}
             </time>
 
-            {post.readingTime && (
+            {post.readingTimeText && (
               <span className="flex items-center">
                 <Clock className="mr-1 h-4 w-4" />
-                {post.readingTime}
+                {post.readingTimeText}
               </span>
             )}
           </div>

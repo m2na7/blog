@@ -1,5 +1,8 @@
-import type { MDXComponents } from 'mdx/types'
+import type { ComponentType } from 'react'
+
 import * as runtime from 'react/jsx-runtime'
+
+type MDXComponents = Record<string, ComponentType<any>>
 
 interface MDXProps {
   code: string

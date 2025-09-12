@@ -1,14 +1,13 @@
 import { notFound } from 'next/navigation'
 
+import { Calendar, Clock } from 'lucide-react'
 import { Metadata } from 'next'
 
 import { mdxComponents } from '@/components/mdx-components'
 import { MDXContent } from '@/components/mdx-contents'
-
+import { BLOG_CONFIG } from '@/constants/config'
 import { getAllPosts, getPostBySlug } from '@/lib/posts'
 import { formatDate } from '@/utils/date'
-import { BLOG_CONFIG } from '@/constants/config'
-import { Calendar, Clock } from 'lucide-react'
 
 interface PostPageProps {
   params: Promise<{
@@ -27,7 +26,7 @@ export async function generateMetadata({
   params,
 }: PostPageProps): Promise<Metadata> {
   const resolvedParams = await params
-  const post = await getPostBySlug(resolvedParams.slug)
+  const post = getPostBySlug(resolvedParams.slug)
 
   if (!post) {
     return {
@@ -65,7 +64,7 @@ export async function generateMetadata({
 
 export default async function PostPage({ params }: PostPageProps) {
   const resolvedParams = await params
-  const post = await getPostBySlug(resolvedParams.slug, true)
+  const post = getPostBySlug(resolvedParams.slug)
 
   if (!post) {
     notFound()
@@ -95,10 +94,10 @@ export default async function PostPage({ params }: PostPageProps) {
               {formatDate(post.date)}
             </time>
 
-            {post.readingTime && (
+            {post.readingTimeText && (
               <span className="flex items-center">
                 <Clock className="mr-1 h-4 w-4" />
-                {post.readingTime}
+                {post.readingTimeText}
               </span>
             )}
           </div>
@@ -106,12 +105,8 @@ export default async function PostPage({ params }: PostPageProps) {
       </header>
 
       {/* 포스트 내용 */}
-      <div className="prose prose-slate dark:prose-invert prose-lg">
-        {post.code ? (
-          <MDXContent code={post.code} components={mdxComponents} />
-        ) : (
-          <div className="text-red-500">MDX 코드가 컴파일되지 않았습니다.</div>
-        )}
+      <div className="prose prose-slate dark:prose-invert max-w-none">
+        <MDXContent code={post.code} components={mdxComponents} />
       </div>
     </article>
   )
