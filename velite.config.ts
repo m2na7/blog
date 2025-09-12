@@ -7,7 +7,24 @@ import { defineConfig, s } from 'velite'
 import { remarkCallout } from './src/lib/remark-callout'
 
 const getReadingTime = (content: string): number => {
-  return Math.max(Math.floor(content.split(' ').length / 250), 1)
+  const cleanContent = content
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/!\[.*?\]\(.*?\)/g, '')
+    .replace(/\[.*?\]\(.*?\)/g, '')
+    .replace(/[#*`_~]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+
+  const koreanChars = (
+    cleanContent.match(
+      /[\u3131-\u314e\u314f-\u3163\uac00-\ud7a3\u4e00-\u9fff]/g
+    ) || []
+  ).length
+  const englishWords = (cleanContent.match(/[a-zA-Z]+/g) || []).length
+
+  const readingTimeMinutes = koreanChars / 300 + englishWords / 200
+
+  return Math.max(Math.ceil(readingTimeMinutes), 1)
 }
 
 export default defineConfig({
