@@ -84,5 +84,29 @@ export default defineConfig({
           readingTime: getReadingTime(data.content),
         })),
     },
+    talks: {
+      name: 'Talk',
+      pattern: 'talks/**/index.mdx',
+      schema: s
+        .object({
+          title: s.string().max(99),
+          date: s.isodate(),
+          description: s.string().max(999),
+          draft: s.boolean().default(false),
+          venue: s.string().optional(),
+          youtubeId: s.string().optional(),
+          slides: s.string().optional(),
+          demo: s.string().optional(),
+          slug: s.slug('talks'),
+          metadata: s.metadata(),
+          excerpt: s.excerpt(),
+          content: s.markdown(),
+          code: s.mdx(),
+        })
+        .transform((data) => ({
+          ...data,
+          permalink: `/talks/${data.slug}`,
+        })),
+    },
   },
 })
