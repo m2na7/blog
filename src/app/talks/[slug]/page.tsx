@@ -51,10 +51,16 @@ export default async function TalkPage({ params }: TalkPageProps) {
 
   return (
     <article className="space-y-8">
-      <header className="space-y-6">
-        <Title size="lg">{talk.title}</Title>
+      <header className="mt-2 space-y-6">
+        <Title size="xl">{talk.title}</Title>
 
-        <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+        {talk.description && (
+          <p className="b text-gray-600 dark:text-gray-300">
+            {talk.description}
+          </p>
+        )}
+
+        <div className="flex flex-wrap items-center gap-4 border-b border-gray-200 pb-6 text-sm text-gray-600 dark:border-gray-700 dark:text-gray-400">
           <div className="flex items-center">
             <Calendar className="mr-1.5 h-4 w-4" />
             {formatDate(talk.date)}
@@ -66,12 +72,6 @@ export default async function TalkPage({ params }: TalkPageProps) {
             </div>
           )}
         </div>
-
-        {talk.description && (
-          <p className="text-lg text-gray-600 dark:text-gray-300">
-            {talk.description}
-          </p>
-        )}
 
         <div className="flex flex-wrap gap-3">
           {talk.slides && (
@@ -103,12 +103,6 @@ export default async function TalkPage({ params }: TalkPageProps) {
 
       {talk.youtubeId && (
         <div className="space-y-4">
-          <div className="flex items-center space-x-2">
-            <Play className="h-5 w-5 text-red-500" />
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-              발표 영상
-            </h2>
-          </div>
           <div className="relative aspect-video overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800">
             <iframe
               src={`https://www.youtube.com/embed/${talk.youtubeId}`}

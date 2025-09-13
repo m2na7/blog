@@ -20,40 +20,42 @@ export default function TalkList({ talk, className }: TalkListProps) {
       )}
     >
       <Link href={`/talks/${talk.slug}`} className="block">
-        <div className="flex items-start justify-between gap-6">
+        <div className="flex items-start justify-between gap-3 sm:gap-6">
           <div className="min-w-0 flex-1">
-            <h2 className="mb-2 line-clamp-2 text-lg font-semibold text-gray-900 transition-colors group-hover:text-blue-600 dark:text-white">
+            <h2 className="mb-2 line-clamp-2 text-base font-semibold text-gray-900 transition-colors group-hover:text-blue-600 sm:text-lg dark:text-white">
               {talk.title}
             </h2>
 
-            <p className="mb-3 line-clamp-2 text-sm text-gray-600 dark:text-gray-300">
+            <p className="mb-3 line-clamp-2 text-xs text-gray-600 sm:text-sm dark:text-gray-300">
               {talk.description}
             </p>
 
-            <div className="flex items-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
-              <time dateTime={talk.date} className="flex items-center">
-                <Calendar className="mr-1.5 h-4 w-4" />
-                {formatDate(talk.date)}
-              </time>
+            <div className="flex flex-col space-y-2 text-xs text-gray-500 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-6 sm:text-sm dark:text-gray-400">
+              <div className="flex items-center space-x-3 sm:space-x-4">
+                <time dateTime={talk.date} className="flex items-center">
+                  <Calendar className="mr-1 h-3 w-3 sm:mr-1.5 sm:h-4 sm:w-4" />
+                  {formatDate(talk.date)}
+                </time>
 
-              {talk.venue && (
-                <span className="flex items-center">
-                  <span className="mr-1.5">📍</span>
-                  {talk.venue}
-                </span>
-              )}
+                {talk.venue && (
+                  <span className="flex items-center">
+                    <span className="mr-1 sm:mr-1.5">📍</span>
+                    <span className="truncate">{talk.venue}</span>
+                  </span>
+                )}
+              </div>
 
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-2 sm:space-x-3">
                 {talk.youtubeId && (
                   <span className="flex items-center text-red-500">
-                    <Play className="mr-1 h-3 w-3" />
+                    <Play className="mr-0.5 h-3 w-3 sm:mr-1" />
                     <span className="text-xs">영상</span>
                   </span>
                 )}
 
                 {talk.slides && (
                   <span className="flex items-center text-blue-500">
-                    <FileText className="mr-1 h-3 w-3" />
+                    <FileText className="mr-0.5 h-3 w-3 sm:mr-1" />
                     <span className="text-xs">자료</span>
                   </span>
                 )}
@@ -62,8 +64,8 @@ export default function TalkList({ talk, className }: TalkListProps) {
           </div>
 
           <div className="flex-shrink-0">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-400 transition-all group-hover:bg-blue-100 group-hover:text-blue-600 dark:bg-zinc-800 dark:text-zinc-500 dark:group-hover:bg-zinc-700 dark:group-hover:text-zinc-400">
-              <ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-gray-400 transition-all group-hover:bg-blue-100 group-hover:text-blue-600 sm:h-10 sm:w-10 dark:bg-zinc-800 dark:text-zinc-500 dark:group-hover:bg-zinc-700 dark:group-hover:text-zinc-400">
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 sm:h-5 sm:w-5" />
             </div>
           </div>
         </div>

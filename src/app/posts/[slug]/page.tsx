@@ -74,28 +74,30 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     <article>
       {/* 포스트 헤더 */}
-      <header className="mb-8 space-y-6 border-b border-gray-200 pb-8 dark:border-zinc-600">
-        <div className="space-y-4">
-          <Title size="lg">{post.title}</Title>
+      <header className="mt-2 mb-8 space-y-6 border-b border-gray-200 pb-8 max-sm:space-y-4 max-sm:pb-6 dark:border-zinc-600">
+        <div className="space-y-6 max-sm:space-y-4">
+          <h1 className="text-4xl leading-tight font-bold text-gray-900 max-sm:text-2xl md:text-4xl dark:text-white">
+            {post.title}
+          </h1>
 
           {post.description && (
-            <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+            <p className="text-lg leading-relaxed text-gray-600 max-sm:text-base dark:text-gray-300">
               {post.description}
             </p>
           )}
         </div>
 
         {/* 메타 정보 */}
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-300">
+        <div className="flex flex-row items-center justify-between gap-4">
+          <div className="flex flex-row items-center space-y-0 space-x-4 text-sm text-gray-600 dark:text-gray-300">
             <time dateTime={post.date} className="flex items-center">
-              <Calendar className="mr-1.5 h-4 w-4" />
+              <Calendar className="mr-1.5 h-4 w-4 max-sm:h-3 max-sm:w-3" />
               {formatDate(post.date)}
             </time>
 
             {post.readingTimeText && (
               <span className="flex items-center">
-                <Clock className="mr-1 h-4 w-4" />
+                <Clock className="mr-1.5 h-4 w-4 max-sm:mr-1 max-sm:h-3 max-sm:w-3" />
                 {post.readingTimeText}
               </span>
             )}
@@ -104,7 +106,7 @@ export default async function PostPage({ params }: PostPageProps) {
       </header>
 
       {/* 포스트 내용 */}
-      <div className="prose prose-slate dark:prose-invert max-w-none">
+      <div className="prose prose-slate dark:prose-invert prose-base max-sm:prose-sm max-w-none">
         <MDXContent code={post.code} components={mdxComponents} />
       </div>
     </article>

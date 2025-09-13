@@ -31,7 +31,7 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
     <>
       <header className="space-y-4">
         <Title size="lg">Posts</Title>
-        <p className="text-gray-600 dark:text-gray-300">
+        <p className="text-sm text-gray-600 sm:text-base dark:text-gray-300">
           총 {pagination.totalPosts}개의 게시물이 있습니다.
         </p>
       </header>

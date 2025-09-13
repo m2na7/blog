@@ -49,25 +49,6 @@ export default function ThemeToggle({ className }: ThemeToggleProps) {
           )}
         </div>
       </div>
-
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-between px-2">
-        <div
-          className={cn(
-            'transition-opacity duration-300',
-            isLight ? 'opacity-70' : 'opacity-0'
-          )}
-        >
-          <Moon className="h-3 w-3 text-white" />
-        </div>
-        <div
-          className={cn(
-            'transition-opacity duration-300',
-            isLight ? 'opacity-0' : 'opacity-70'
-          )}
-        >
-          <Sun className="h-3 w-3 text-white" />
-        </div>
-      </div>
     </button>
   )
 }

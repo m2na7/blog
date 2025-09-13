@@ -29,12 +29,12 @@ export default function PostCardHero({ post, className }: PostCardHeroProps) {
   return (
     <article
       className={cn(
-        'group overflow-hidden rounded-3xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-zinc-800 dark:shadow-gray-900/20',
+        'group overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:rounded-3xl dark:bg-zinc-800 dark:shadow-gray-900/20',
         className
       )}
     >
       <Link href={`/posts/${post.slug}`} className="block">
-        <div className="relative h-48 overflow-hidden">
+        <div className="relative h-40 overflow-hidden sm:h-48">
           {thumbnail ? (
             <>
               <Image
@@ -54,12 +54,12 @@ export default function PostCardHero({ post, className }: PostCardHeroProps) {
             </>
           )}
 
-          <div className="absolute inset-0 flex items-end p-6">
+          <div className="absolute inset-0 flex items-end p-4 sm:p-6">
             <div className="text-white">
-              <h2 className="mb-2 line-clamp-2 text-xl leading-tight font-bold">
+              <h2 className="mb-2 line-clamp-2 text-xl leading-tight font-bold max-sm:text-lg">
                 {post.title}
               </h2>
-              <div className="flex items-center space-x-4 text-sm text-white/90">
+              <div className="flex flex-col space-y-1 text-xs text-white/90 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-4 sm:text-sm">
                 <time dateTime={post.date} className="flex items-center">
                   <Calendar className="mr-1 h-3 w-3" />
                   {formatDate(post.date)}
@@ -75,14 +75,16 @@ export default function PostCardHero({ post, className }: PostCardHeroProps) {
           </div>
         </div>
 
-        <div className="p-6">
-          <p className="mb-4 line-clamp-3 leading-relaxed text-gray-600 dark:text-gray-200">
+        <div className="p-6 max-sm:p-4">
+          <p className="mb-4 line-clamp-3 text-base leading-relaxed text-gray-600 max-sm:mb-3 max-sm:line-clamp-2 max-sm:text-sm dark:text-gray-200">
             {post.description || post.excerpt}
           </p>
 
-          <div className="j flex items-center text-blue-600 transition-colors group-hover:text-blue-700 dark:text-blue-400">
-            <span className="mr-1 text-sm font-medium">더 읽기</span>
-            <ChevronRight className="h-4 w-4" />
+          <div className="flex items-center text-blue-600 transition-colors group-hover:text-blue-700 dark:text-blue-400">
+            <span className="mr-1 text-sm font-medium max-sm:text-xs">
+              더 읽기
+            </span>
+            <ChevronRight className="h-4 w-4 max-sm:h-3 max-sm:w-3" />
           </div>
         </div>
       </Link>
