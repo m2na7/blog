@@ -80,7 +80,7 @@ export default function PostCardHero({ post, className }: PostCardHeroProps) {
             {post.description || post.excerpt}
           </p>
 
-          <div className="flex items-center text-blue-600 transition-colors group-hover:text-blue-700 dark:text-blue-400">
+          <div className="flex items-center justify-end text-blue-600 transition-colors group-hover:text-blue-700 dark:text-blue-400">
             <span className="mr-1 text-sm font-medium">더 읽기</span>
             <ChevronRight className="h-4 w-4" />
           </div>

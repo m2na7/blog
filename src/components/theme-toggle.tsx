@@ -53,7 +53,7 @@ export default function ThemeToggle({ className }: ThemeToggleProps) {
     <button
       onClick={toggleTheme}
       className={cn(
-        'group relative rounded-xl bg-gray-100 p-3 text-gray-600 transition-all duration-300 hover:scale-110 hover:bg-gray-200 hover:text-gray-900 active:scale-95 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-blue-400',
+        'group relative cursor-pointer rounded-xl bg-gray-100 p-3 text-gray-600 transition-all duration-300 hover:scale-110 hover:bg-gray-200 hover:text-gray-900 active:scale-95 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-blue-400',
         className
       )}
       aria-label={`현재: ${getLabel()}, 클릭하여 변경`}

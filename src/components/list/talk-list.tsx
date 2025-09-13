@@ -1,47 +1,63 @@
 import Link from 'next/link'
 
-import { Calendar, Clock, ArrowUpRight } from 'lucide-react'
+import { Calendar, ArrowUpRight, FileText, Play } from 'lucide-react'
 
-import type { PostSummary } from '@/lib/posts'
+import type { TalkSummary } from '@/lib/talks'
 import { cn } from '@/utils/cn'
 import { formatDate } from '@/utils/date'
 
-interface PostListItemProps {
-  post: PostSummary
+interface TalkListProps {
+  talk: TalkSummary
   className?: string
 }
 
-export default function PostListItem({ post, className }: PostListItemProps) {
+export default function TalkList({ talk, className }: TalkListProps) {
   return (
     <article
       className={cn(
-        'group border-b border-gray-300 px-2 py-6 transition-colors hover:bg-gray-50/50 dark:border-gray-800 dark:hover:bg-gray-800/30',
+        'group border-b border-gray-300 px-2 py-6 transition-colors last:border-b-0 hover:bg-gray-50/50 dark:border-gray-800 dark:hover:bg-gray-800/20',
         className
       )}
     >
-      <Link href={`/posts/${post.slug}`} className="block">
+      <Link href={`/talks/${talk.slug}`} className="block">
         <div className="flex items-start justify-between gap-6">
           <div className="min-w-0 flex-1">
             <h2 className="mb-2 line-clamp-2 text-xl font-semibold text-gray-900 transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
-              {post.title}
+              {talk.title}
             </h2>
 
             <p className="mb-3 line-clamp-2 text-gray-600 dark:text-gray-300">
-              {post.description || post.excerpt}
+              {talk.description}
             </p>
 
             <div className="flex items-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
-              <time dateTime={post.date} className="flex items-center">
+              <time dateTime={talk.date} className="flex items-center">
                 <Calendar className="mr-1.5 h-4 w-4" />
-                {formatDate(post.date)}
+                {formatDate(talk.date)}
               </time>
 
-              {post.readingTimeText && (
+              {talk.venue && (
                 <span className="flex items-center">
-                  <Clock className="mr-1.5 h-4 w-4" />
-                  {post.readingTimeText}
+                  <span className="mr-1.5">📍</span>
+                  {talk.venue}
                 </span>
               )}
+
+              <div className="flex items-center space-x-3">
+                {talk.youtubeId && (
+                  <span className="flex items-center text-red-500">
+                    <Play className="mr-1 h-3 w-3" />
+                    <span className="text-xs">영상</span>
+                  </span>
+                )}
+
+                {talk.slides && (
+                  <span className="flex items-center text-blue-500">
+                    <FileText className="mr-1 h-3 w-3" />
+                    <span className="text-xs">자료</span>
+                  </span>
+                )}
+              </div>
             </div>
           </div>
 
