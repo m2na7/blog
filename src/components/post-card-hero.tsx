@@ -29,7 +29,7 @@ export default function PostCardHero({ post, className }: PostCardHeroProps) {
   return (
     <article
       className={cn(
-        'group overflow-hidden rounded-3xl bg-white shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl dark:bg-gray-800 dark:shadow-gray-900/20',
+        'group overflow-hidden rounded-3xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-zinc-800 dark:shadow-gray-900/20',
         className
       )}
     >
@@ -43,7 +43,7 @@ export default function PostCardHero({ post, className }: PostCardHeroProps) {
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent dark:from-black/40 dark:via-black/20 dark:to-transparent" />
             </>
           ) : (
             <>
@@ -76,11 +76,11 @@ export default function PostCardHero({ post, className }: PostCardHeroProps) {
         </div>
 
         <div className="p-6">
-          <p className="mb-4 line-clamp-3 leading-relaxed text-gray-600 dark:text-gray-300">
+          <p className="mb-4 line-clamp-3 leading-relaxed text-gray-600 dark:text-gray-200">
             {post.description || post.excerpt}
           </p>
 
-          <div className="flex items-center justify-end text-blue-600 transition-colors group-hover:text-blue-700 dark:text-blue-400">
+          <div className="j flex items-center text-blue-600 transition-colors group-hover:text-blue-700 dark:text-blue-400">
             <span className="mr-1 text-sm font-medium">더 읽기</span>
             <ChevronRight className="h-4 w-4" />
           </div>

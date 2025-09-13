@@ -74,7 +74,7 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     <article>
       {/* 포스트 헤더 */}
-      <header className="mb-8 space-y-6 border-b border-gray-200 pb-8">
+      <header className="mb-8 space-y-6 border-b border-gray-200 pb-8 dark:border-zinc-600">
         <div className="space-y-4">
           <Title size="lg">{post.title}</Title>
 

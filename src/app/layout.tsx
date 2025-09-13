@@ -37,8 +37,8 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className="min-h-screen bg-white antialiased transition-colors duration-200 dark:bg-gray-300">
-        <ThemeProvider attribute="class">
+      <body className="min-h-screen bg-white antialiased transition-colors duration-200 dark:bg-gray-900">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="flex min-h-screen flex-col">
             <Header />
             <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-8">

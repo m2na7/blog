@@ -23,7 +23,7 @@ export default function HomePage() {
             </div>
             <Link
               href="/posts"
-              className="group mt-3 flex items-center space-x-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+              className="group mt-3 flex items-center space-x-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-gray-300 dark:hover:bg-zinc-700"
             >
               <span>전체 보기</span>
               <span className="transition-transform group-hover:translate-x-1">
