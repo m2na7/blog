@@ -9,10 +9,6 @@ thumbnail: './assets/thumbnail.webp'
 
 ![thumbnail](./assets/thumbnail.webp)
 
-# React Router에서 generatePath를 활용해 타입 안전성과 DX 둘 다 잡기
-
-동적 URL을 Type-Safe하게 생성하면서도, DX를 놓치지 않으려 했던 경험을 적었어요.
-
 TypeScript로 코드를 작성할 때, 항상 고민되는 질문이 있습니다.
 
 > "얼마나 안전하게 타입을 사용할 것인가?"
@@ -104,13 +100,11 @@ buildPath('/users/:userId/:name', { id: '1', name: 'confeti' })
 하지만, 사실 이런 함수를 직접 만들지 않아도 됩니다!
 
 React Router는 이미 내부적으로 이런 역할을 하는 `generatePath` 함수를 제공하며,
-
 `PathParam` 유틸리티 함수도 내부적으로 정의되어 있어요.
 
 ## 3. **generatePath와 함께하는** Type-safe**한 URL 생성**
 
 React Router에서 제공하는 `generatePath` 함수는
-
 경로 템플릿(예: `"/users/:userId"`)에 파라미터 객체를 넣어 실제 URL 문자열을 생성해주는 역할을 해요.
 
 ![generatePath API 문서](./assets/generate-path.webp)
@@ -171,6 +165,7 @@ _react-router Discussions_
 
 처음에는 왜 `string`만을 허용하는지 의문이 커서 Discussion을 남기기도 했어요.
 
+<br />
 자세히 찾아보니 이전부터 저와같은 고민을 했던 분들이 있었어요.
 
 ![TypeScript-DOM-lib-generator](./assets/type-script-dom-lib-generator.webp)
@@ -179,7 +174,6 @@ _https://github.com/remix-run/react-router/discussions/10393_
 그리고 **TypeScript-DOM-lib-generator** 에서도 유사한 토론을 나눈 것을 확인할 수 있었어요.
 
 이에 대해 조금 더 알아본 결과, URL은 본질적으로 **문자열 기반 시스템**이라는 점을 깨닫게 되었어요.
-
 [MDN URL API 문서](https://developer.mozilla.org/ko/docs/Web/API/URL)
 
 React Router 팀은 `generatePath` 함수의 파라미터 타입을 `string`으로 제한했는데, 이는 단순한 제약이 아니라 웹 URL 시스템의 본질을 반영한 설계에요.
@@ -231,8 +225,6 @@ buildPath(routePath.USER_DETAIL, { userId: '456' })
 buildPath('/users/:userId/:name', { userId: 1, name: 'confeti' })
 // ✅ → "/users/1/confeti"
 ```
-
-## 결론 🚀
 
 > React Router는 웹의 원칙과 타입 안정성을 잘 지키도록 설계되어있어요.
 >

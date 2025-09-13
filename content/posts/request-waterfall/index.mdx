@@ -9,10 +9,6 @@ thumbnail: './assets/thumbnail.webp'
 
 ![thumbnail](./assets/thumbnail.webp)
 
-# useSuspenseQueries로 request waterfall 현상 해결하기
-
-request waterfall 현상을 해결하며, 홈 페이지 진입속도를 약 73% 단축시킨 경험을 적었어요.
-
 > TanStack Query와 React Suspense를 함께 사용할 때,
 >
 > 의도치 않게 **request waterfall 현상**이 발생해 느린 사용자 경험을 겪은 적 있으신가요?
@@ -23,7 +19,7 @@ confeti 프로젝트 내에서 `useSuspenseQuery`를 활용하던 중 이러한 
 
 이 글에서는 request waterfall 현상이 무엇인지, 왜 발생했는지, 그리고 어떻게 해결했는지 상세히 정리해보려고해요.
 
-## 🌀 Request Waterfall이란?
+## 1. Request Waterfall이란?
 
 **request Waterfall**은 여러 개의 API 요청이 **병렬로 실행되지 않고 순차적으로 실행되는** 상황을 말해요.
 
@@ -37,7 +33,7 @@ confeti 프로젝트 내에서 `useSuspenseQuery`를 활용하던 중 이러한 
 
 결과적으로 불필요한 대기 시간이 누적되면서,사용자에게는 **느리고 답답한 화면**으로 느껴질 수밖에 없어요.
 
-## ❗️ Suspense와 useSuspenseQuery가 만났을 때 생기는 문제
+## 2. Suspense와 useSuspenseQuery가 만났을 때 생기는 문제
 
 TanStack Query의 `useSuspenseQuery`는 Suspense를 활용하여 `isLoading` 없이 로딩 처리를 가능하게 해줘요.
 
@@ -49,7 +45,7 @@ TanStack Query의 `useSuspenseQuery`는 Suspense를 활용하여 `isLoading` 없
 
 즉, 여러 개의 `useSuspenseQuery`를 하나의 컴포넌트에서 나란히 호출했더라도 **실제로는 병렬이 아닌 순차적으로 요청이 발생**하게 돼요.
 
-## 💥 의도치 않은 request waterfall 발생
+## 3. 의도치 않은 request waterfall 발생
 
 confeti 프로젝트는 전체 화면을 `<Suspense>`로 감싸 로딩 상태를 통합 관리하고, 일관된 로딩 UI를 제공하기 위해 `useSuspenseQuery`를 적극 활용했어요.
 
@@ -81,7 +77,7 @@ _실제 네트워크탭 waterfall_
 
 시간을 계산해보면 총 101ms + 37ms + 77ms + 77ms = 292ms가 걸리게 된 거예요.
 
-## 💡 useSuspenseQueries로 병렬 처리 하기
+## 4. useSuspenseQueries로 병렬 처리 하기
 
 TanStack Query는 이 문제를 해결할 수 있는 `useSuspenseQueries` 훅을 제공해요.
 
@@ -116,7 +112,7 @@ export const useHomeQueries = () => {
 };
 ```
 
-**✅ 이 방식의 장점**
+**✅ 장점**
 
 - 쿼리 요청이 실제로 **동시에 병렬로 실행**됨 (request waterfall 현상 해결)
 - 더 이상 하나의 쿼리 응답을 기다리지 않기 때문에 전체 페이지 로딩 시간이 단축됨
@@ -124,13 +120,10 @@ export const useHomeQueries = () => {
 
 ![병렬처리된 waterfall](./assets/parallel-waterfall.webp)
 _병렬처리된 waterfall_
-
+<br/>
 기존 방식에서의 전체 페이지 로딩 시간은 API 요청이 순차적으로 처리되며, 약 **292ms**가 소요됐었어요.
-
 하지만 `useSuspenseQueries`를 적용해 병렬로 요청을 보내도록 개선한 결과, 로딩 시간이 **78ms**로 줄어들었어요.
 
 무려 **약 73%의 성능 개선**이며, 특히 **고지연 네트워크 환경**에서는 이 차이가 훨씬 더 크게 체감될 수 있어요.
 
 결과적으로 사용자 입장에서 특히나 민감하게 느껴지는 **초기 홈 화면 진입 속도**를 효과적으로 단축할 수 있었어요!
-
----
