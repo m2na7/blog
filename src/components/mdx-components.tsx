@@ -32,19 +32,19 @@ export const mdxComponents: MDXComponents = {
 
   p: (props) => (
     <p
-      className="mb-4 leading-relaxed text-gray-700 max-sm:mb-3 dark:text-gray-300"
+      className="mb-4 leading-relaxed text-gray-700 max-sm:mb-3 dark:text-gray-200"
       {...props}
     />
   ),
   ul: (props) => (
     <ul
-      className="mb-4 list-inside list-disc space-y-2 text-gray-700 max-sm:mb-3 max-sm:space-y-1 dark:text-gray-300"
+      className="mb-4 list-inside list-disc space-y-2 text-gray-700 max-sm:mb-3 max-sm:space-y-1 dark:text-gray-200"
       {...props}
     />
   ),
   ol: (props) => (
     <ol
-      className="mb-4 list-inside list-decimal space-y-2 text-gray-700 max-sm:mb-3 max-sm:space-y-1 dark:text-gray-300"
+      className="mb-4 list-inside list-decimal space-y-2 text-gray-700 max-sm:mb-3 max-sm:space-y-1 dark:text-gray-200"
       {...props}
     />
   ),
@@ -57,7 +57,7 @@ export const mdxComponents: MDXComponents = {
   ),
   code: (props: any) => (
     <code
-      className="rounded-md bg-gray-100 px-1 py-0.5 font-mono text-sm text-gray-800 max-sm:text-xs dark:bg-gray-800 dark:text-gray-200"
+      className="mr-[2px] rounded-md bg-stone-100 px-1 py-0.5 font-mono text-sm text-zinc-700 transition-colors duration-200 max-sm:text-xs dark:bg-zinc-700 dark:text-zinc-100"
       {...props}
     />
   ),
@@ -68,7 +68,7 @@ export const mdxComponents: MDXComponents = {
 
   a: (props) => (
     <a
-      className="text-gray-700 underline decoration-gray-400 transition-colors hover:text-gray-900 hover:decoration-gray-700 dark:text-gray-300 dark:hover:text-white dark:hover:decoration-gray-200"
+      className="text-gray-700 underline decoration-gray-400 transition-colors hover:text-gray-900 hover:decoration-gray-700 dark:text-gray-200 dark:hover:text-white dark:hover:decoration-gray-200"
       target={props.href?.startsWith('http') ? '_blank' : undefined}
       rel={props.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
       {...props}

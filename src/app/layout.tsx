@@ -10,8 +10,8 @@ import '@/styles/global.css'
 
 export const metadata: Metadata = {
   title: {
-    default: 'm2na',
-    template: '%s | m2na',
+    default: 'm2na.dev',
+    template: '%s | m2na.dev',
   },
   description: "m2na's blog",
   openGraph: {
@@ -33,10 +33,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className="scroll-smooth" suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
       <body className="min-h-screen bg-white antialiased transition-colors duration-200 dark:bg-gray-900">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="flex min-h-screen flex-col">
