@@ -4,7 +4,7 @@ export const BLOG_CONFIG = {
   author: 'Minha Kang',
   url: 'https://m2na.dev',
 
-  postsPerPage: 10,
+  postsPerPage: 5,
   enableComments: true,
   enableAnalytics: true,
 
