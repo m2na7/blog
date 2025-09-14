@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   description: BLOG_CONFIG.description,
   icons: {
-    icon: '/favicon.ico',
+    icon: `${BLOG_CONFIG.url}/favicon.ico`,
   },
   openGraph: {
     type: 'website',
