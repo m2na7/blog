@@ -31,9 +31,6 @@ export default async function TalksPage({ searchParams }: TalksPageProps) {
     <div>
       <header className="space-y-4">
         <Title size="lg">Talks</Title>
-        <p className="text-sm text-gray-600 sm:text-base dark:text-gray-300">
-          총 {pagination.totalTalks}개의 게시물이 있습니다.
-        </p>
       </header>
 
       <Suspense fallback={<TalksLoading />}>

@@ -29,7 +29,7 @@ export default function PostCardHero({ post, className }: PostCardHeroProps) {
   return (
     <article
       className={cn(
-        'group overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:rounded-3xl dark:bg-zinc-800 dark:shadow-gray-900/20',
+        'group relative overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:rounded-3xl dark:bg-zinc-800 dark:shadow-gray-900/20',
         className
       )}
     >
@@ -76,11 +76,11 @@ export default function PostCardHero({ post, className }: PostCardHeroProps) {
         </div>
 
         <div className="p-6 max-sm:p-4">
-          <p className="mb-4 line-clamp-3 text-base leading-relaxed text-gray-600 max-sm:mb-3 max-sm:line-clamp-2 max-sm:text-sm dark:text-gray-200">
+          <p className="mb-10 line-clamp-3 text-base leading-relaxed text-gray-600 max-sm:mb-3 max-sm:line-clamp-2 max-sm:text-sm dark:text-gray-200">
             {post.description || post.excerpt}
           </p>
 
-          <div className="flex items-center text-blue-600 transition-colors group-hover:text-blue-700 dark:text-blue-400">
+          <div className="absolute bottom-6 flex items-center text-blue-600 transition-colors group-hover:text-blue-700 max-sm:bottom-4 dark:text-blue-400">
             <span className="mr-1 text-sm font-medium max-sm:text-xs">
               더 읽기
             </span>
