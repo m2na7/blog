@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     template: '%s | m2na.dev',
   },
   description: BLOG_CONFIG.description,
+  icons: {
+    icon: '/favicon.ico',
+  },
   openGraph: {
     type: 'website',
     locale: 'ko_KR',
