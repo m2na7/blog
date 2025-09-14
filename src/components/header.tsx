@@ -11,7 +11,7 @@ export default function Header() {
   const pathname = usePathname()
   return (
     <header className="sticky top-0 z-50 w-full backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-2xl items-center justify-between border-b border-gray-200 px-6 transition-colors duration-200 max-sm:px-4 dark:border-zinc-800">
+      <div className="mx-auto flex h-16 max-w-2xl items-center justify-between border-b border-gray-200 transition-colors duration-200 max-sm:px-4 dark:border-zinc-800">
         <Link
           href="/"
           className="group relative overflow-hidden text-xl font-bold text-gray-900 max-sm:text-lg dark:text-white"
