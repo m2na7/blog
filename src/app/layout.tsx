@@ -5,20 +5,29 @@ import { ThemeProvider } from 'next-themes'
 
 import Footer from '@/components/footer'
 import Header from '@/components/header'
+import { BLOG_CONFIG } from '@/constants/config'
 
 import '@/styles/global.css'
 
 export const metadata: Metadata = {
   title: {
-    default: 'm2na.dev',
+    default: BLOG_CONFIG.title,
     template: '%s | m2na.dev',
   },
-  description: "m2na's blog",
+  description: BLOG_CONFIG.description,
   openGraph: {
     type: 'website',
     locale: 'ko_KR',
-    title: 'm2na',
-    url: 'https://m2na.dev',
+    title: BLOG_CONFIG.title,
+    url: BLOG_CONFIG.url,
+    images: [
+      {
+        url: `${BLOG_CONFIG.url}/assets/og_image.png`,
+        width: 1200,
+        height: 630,
+        alt: BLOG_CONFIG.title,
+      },
+    ],
   },
   robots: {
     index: true,

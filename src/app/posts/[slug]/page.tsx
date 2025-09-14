@@ -36,7 +36,11 @@ export async function generateMetadata({
     }
   }
 
-  const ogImage = `${BLOG_CONFIG.url}${post.image}`
+  const ogImage = post.image
+    ? `${BLOG_CONFIG.url}${post.image}`
+    : post.thumbnail
+      ? `${BLOG_CONFIG.url}${post.thumbnail.src}`
+      : `${BLOG_CONFIG.url}/og-default.png`
 
   return {
     title: post.title,

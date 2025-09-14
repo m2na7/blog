@@ -5,6 +5,7 @@ import { Metadata } from 'next'
 
 import { MDXContent } from '@/components/mdx-contents'
 import Title from '@/components/title'
+import { BLOG_CONFIG } from '@/constants/config'
 import { getAllTalks, getTalkBySlug } from '@/lib/talks'
 import { formatDate } from '@/utils/date'
 
@@ -37,6 +38,14 @@ export async function generateMetadata({
       description: talk.description,
       type: 'article',
       publishedTime: talk.date,
+      images: [
+        {
+          url: `${BLOG_CONFIG.url}/assets/og_image.png`,
+          width: 1200,
+          height: 630,
+          alt: BLOG_CONFIG.title,
+        },
+      ],
     },
   }
 }
