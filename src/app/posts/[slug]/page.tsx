@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
 import { Calendar, Clock } from 'lucide-react'
@@ -73,12 +74,22 @@ export default async function PostPage({ params }: PostPageProps) {
 
   return (
     <article>
+      {post.thumbnail && (
+        <div className="relative mb-8 aspect-[7/4]">
+          <Image
+            src={post.thumbnail.src}
+            alt={post.title}
+            fill
+            className="rounded-2xl object-cover"
+            blurDataURL={post.thumbnail.blurDataURL}
+          />
+        </div>
+      )}
+
       {/* 포스트 헤더 */}
       <header className="mt-2 mb-8 space-y-6 border-b border-gray-200 pb-8 max-sm:space-y-4 max-sm:pb-6 dark:border-zinc-600">
         <div className="space-y-6 max-sm:space-y-4">
-          <h1 className="text-4xl leading-tight font-bold text-gray-900 max-sm:text-2xl md:text-4xl dark:text-white">
-            {post.title}
-          </h1>
+          <Title size="xl">{post.title}</Title>
 
           {post.description && (
             <p className="text-lg leading-relaxed text-gray-600 max-sm:text-base dark:text-gray-300">

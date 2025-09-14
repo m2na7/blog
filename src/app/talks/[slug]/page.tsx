@@ -55,7 +55,7 @@ export default async function TalkPage({ params }: TalkPageProps) {
         <Title size="xl">{talk.title}</Title>
 
         {talk.description && (
-          <p className="text-lg text-gray-600 dark:text-gray-300">
+          <p className="text-lg text-gray-600 max-sm:text-base dark:text-gray-300">
             {talk.description}
           </p>
         )}

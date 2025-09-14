@@ -11,7 +11,7 @@ const titleSizes = {
   sm: 'text-xl font-semibold',
   md: 'text-2xl font-bold',
   lg: 'text-3xl font-bold',
-  xl: 'text-4xl font-bold',
+  xl: 'text-4xl font-bold max-sm:text-3xl',
 }
 
 const alignments = {

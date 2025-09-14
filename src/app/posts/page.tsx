@@ -3,6 +3,7 @@ import { Suspense } from 'react'
 import { Metadata } from 'next'
 
 import PostList from '@/components/list/post-list'
+import Pagination from '@/components/pagination'
 import PostListSkeleton from '@/components/skeleton/post-list-skeleton'
 import Title from '@/components/title'
 import { BLOG_CONFIG } from '@/constants/config'
@@ -33,21 +34,27 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
         <Title size="lg">Posts</Title>
       </header>
 
-      <Suspense fallback={<PostsLoading />}>
+      <Suspense fallback={<PostsLoading count={posts.length} />}>
         <div className="divide-y divide-gray-100 dark:divide-gray-800">
           {posts.map((post) => (
             <PostList key={post.slug} post={post} />
           ))}
         </div>
       </Suspense>
+
+      <Pagination
+        currentPage={pagination.currentPage}
+        totalPages={pagination.totalPages}
+        basePath="/posts"
+      />
     </>
   )
 }
 
-function PostsLoading() {
+function PostsLoading({ count }: { count: number }) {
   return (
     <div className="divide-y divide-gray-100 dark:divide-gray-800">
-      {[...Array(6)].map((_, i) => (
+      {[...Array(count)].map((_, i) => (
         <PostListSkeleton key={i} />
       ))}
     </div>
