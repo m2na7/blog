@@ -105,6 +105,18 @@
     height: auto;
   }
 
+  ul li a {
+    text-decoration: underline;
+    transition: color 0.1s ease;
+  }
+  a:hover {
+    color: rgb(37 99 235);
+  }
+
+  .dark a:hover {
+    color: rgb(96 165 250);
+  }
+
   .prose img + em {
     display: block;
     text-align: center;

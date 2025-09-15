@@ -32,7 +32,6 @@ export default function AboutMeSection() {
             • TanStack (
             <a
               href="https://github.com/TanStack/query/pulls?q=author%3Am2na7+is%3Aclosed"
-              className="text-primary underline hover:text-blue-500 hover:transition-colors hover:duration-100"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -41,7 +40,6 @@ export default function AboutMeSection() {
             ,{' '}
             <a
               href="https://github.com/TanStack/form/pulls?q=author%3Am2na7+is%3Aclosed"
-              className="text-primary underline hover:text-blue-500 hover:transition-colors hover:duration-100"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -53,7 +51,6 @@ export default function AboutMeSection() {
             • toss (
             <a
               href="https://github.com/toss/suspensive/pulls?q=author%3Am2na7+is%3Aclosed"
-              className="text-primary underline hover:text-blue-500 hover:transition-colors hover:duration-100"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -62,7 +59,6 @@ export default function AboutMeSection() {
             ,{' '}
             <a
               href="https://github.com/toss/react-simplikit/pulls?q=author%3Am2na7+is%3Aclosed"
-              className="text-primary underline hover:text-blue-500 hover:transition-colors hover:duration-100"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -74,7 +70,6 @@ export default function AboutMeSection() {
             •{' '}
             <a
               href="https://github.com/react-hook-form/react-hook-form/pulls?q=author%3Am2na7+is%3Aclosed"
-              className="text-primary underline hover:text-blue-500 hover:transition-colors hover:duration-100"
               target="_blank"
               rel="noopener noreferrer"
             >

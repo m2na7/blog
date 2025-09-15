@@ -68,7 +68,7 @@ export const mdxComponents: MDXComponents = {
 
   a: (props) => (
     <a
-      className="text-gray-700 underline decoration-gray-400 transition-colors hover:text-gray-900 hover:decoration-gray-700 dark:text-gray-200 dark:hover:text-white dark:hover:decoration-gray-200"
+      className="text-gray-700 underline decoration-gray-400 transition-colors hover:text-blue-600 hover:decoration-blue-600 dark:text-gray-200 dark:hover:text-white dark:hover:decoration-gray-200"
       target={props.href?.startsWith('http') ? '_blank' : undefined}
       rel={props.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
       {...props}
