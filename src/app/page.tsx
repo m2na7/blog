@@ -4,7 +4,7 @@ import { getAllPosts } from '@/lib/posts'
 
 export default function HomePage() {
   const allPosts = getAllPosts()
-  const recentPosts = allPosts.slice(0, 3)
+  const recentPosts = allPosts.slice(0, 2)
 
   return (
     <div className="space-y-12 max-sm:space-y-8">

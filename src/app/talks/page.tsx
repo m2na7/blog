@@ -29,8 +29,11 @@ export default async function TalksPage({ searchParams }: TalksPageProps) {
 
   return (
     <div>
-      <header className="space-y-4">
+      <header className="mb-2 space-y-2">
         <Title size="lg">Talks</Title>
+        <h2 className="text-zinc-600 max-sm:text-sm dark:text-zinc-300">
+          세미나와 발표 경험을 기록하고 공유해요.
+        </h2>
       </header>
 
       <Suspense fallback={<TalksLoading />}>

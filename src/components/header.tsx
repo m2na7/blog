@@ -30,10 +30,10 @@ export default function Header() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    'px-4 py-2 text-[15px] font-medium no-underline transition-colors duration-200',
+                    'rounded-2xl px-4 py-2 text-[15px] font-medium no-underline transition-all duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-800',
                     isActive
                       ? 'text-blue-600 dark:text-blue-400'
-                      : 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200'
+                      : 'text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100'
                   )}
                 >
                   {item.name}

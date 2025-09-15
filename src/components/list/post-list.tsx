@@ -16,7 +16,7 @@ export default function PostList({ post, className }: PostListProps) {
   return (
     <article
       className={cn(
-        'group border-b border-gray-300 px-2 py-6 transition-colors last:border-b-0 hover:bg-gray-50/50 max-sm:py-4 dark:border-zinc-700 dark:hover:bg-zinc-700/20',
+        'group border-b border-gray-300 px-2 py-6 transition-colors last:border-b-0 hover:bg-gray-50/50 dark:border-zinc-700 dark:hover:bg-zinc-700/20',
         className
       )}
     >

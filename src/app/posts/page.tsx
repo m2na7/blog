@@ -30,8 +30,11 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
 
   return (
     <>
-      <header className="space-y-4">
+      <header className="mb-2 space-y-2">
         <Title size="lg">Posts</Title>
+        <h2 className="text-zinc-600 max-sm:text-sm dark:text-zinc-300">
+          개발 관련 기술과 경험을 기록하고 공유해요.
+        </h2>
       </header>
 
       <Suspense fallback={<PostsLoading count={posts.length} />}>

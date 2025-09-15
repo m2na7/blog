@@ -29,7 +29,7 @@ export default function PostCardHero({ post, className }: PostCardHeroProps) {
   return (
     <article
       className={cn(
-        'group relative overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:rounded-3xl dark:bg-zinc-800 dark:shadow-gray-900/20',
+        'group relative flex-1 overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:rounded-3xl dark:bg-zinc-800 dark:shadow-gray-900/20',
         className
       )}
     >
@@ -56,7 +56,7 @@ export default function PostCardHero({ post, className }: PostCardHeroProps) {
 
           <div className="absolute inset-0 flex items-end p-4 sm:p-6">
             <div className="text-white">
-              <h2 className="mb-2 line-clamp-2 text-xl leading-tight font-bold max-sm:text-lg">
+              <h2 className="mb-2 text-lg leading-tight font-bold max-sm:text-base">
                 {post.title}
               </h2>
               <div className="flex flex-col space-y-1 text-xs text-white/90 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-4 sm:text-sm">
@@ -75,8 +75,8 @@ export default function PostCardHero({ post, className }: PostCardHeroProps) {
           </div>
         </div>
 
-        <div className="p-6 max-sm:p-4">
-          <p className="mb-10 line-clamp-3 text-base leading-relaxed text-gray-600 max-sm:mb-3 max-sm:line-clamp-2 max-sm:text-sm dark:text-gray-200">
+        <div className="p-6 max-sm:mb-5 max-sm:p-4">
+          <p className="mb-10 text-sm leading-relaxed text-zinc-600 max-sm:mb-3 dark:text-zinc-200">
             {post.description || post.excerpt}
           </p>
 
