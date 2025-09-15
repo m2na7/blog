@@ -1,5 +1,5 @@
 ---
-title: 'React Compact Toast (2) - 오픈소스 제작기'
+title: '토스트 오픈소스 라이브러리 배포하기 - React Compact Toast(2)'
 description: '직접 만든 토스트 컴포넌트를 오픈소스 라이브러리로 만들었던 과정을 공유해요.'
 date: '2025-09-14'
 thumbnail: './assets/thumbnail.webp'
@@ -8,11 +8,11 @@ slug: 'react-compact-toast-part2'
 
 {/* ![thumbnail](./assets/thumbnail.webp) */}
 
-> **React Compact Toast**는 React 애플리케이션에서 간편하고 경량화된 토스트 알림을 제공하기 위해 설계한 오픈소스 UI 라이브러리예요.  
-> 이번 포스트에서는 직접 만든 토스트 컴포넌트를 실제 오픈소스 라이브러리로 만들어가는 과정에 대해 작성했어요. <br/><br/>
+> **React Compact Toast**는 React 애플리케이션에서 간편하고 경량화된 토스트 알림을 제공하기 위해 제작한 오픈소스 라이브러리예요. <br/><br/>
 > [**GitHub**](https://github.com/m2na7/react-compact-toast) | [**Site**](https://react-compact-toast.vercel.app/) | [**npm**](https://www.npmjs.com/package/react-compact-toast)
 
-[**토스트 컴포넌트 구현 이야기는 1편을 참고해주세요.**](http://m2na.dev/posts/react-compact-toast-part1)
+이번 포스트에서는 React Compact Toast를 오픈소스 라이브러리로 만들어가는 과정에 대해 작성했어요.  
+[**토스트 컴포넌트 구현기는 1편을 참고해주세요.**](http://m2na.dev/posts/react-compact-toast-part1)
 
 ## 1. 오픈소스 라이브러리로 만들어보자
 
@@ -110,13 +110,13 @@ export default defineConfig([
 ## 4. 번들 크기 최적화
 
 이제 해결해야 하는 중요한 문제는 **번들 크기 최적화**예요.  
-기존에 가장 많은 유저가 사용하는 토스트 라이브러리의 번들 크기(Bundlephbia, gzipped 기준)는 다음과 같았어요.
+기존에 가장 많은 유저가 사용하는 토스트 라이브러리의 번들 크기(Bundlephobia, gzipped 기준)는 다음과 같았어요.
 
 - **sonner**: 9.3KB
 - **react-toastify**: 6.9KB
 - **react-hot-toast**: 5.2KB
 
-저는 이 라이브러리보다 최소 2배는 가벼운 라이브러리를 목표로 삼았어요.
+저는 이 라이브러리들보다 최소 2배는 가벼운 라이브러리를 목표로 삼았어요.
 
 ### 1) Tree-shaking 친화적으로 만들기
 
