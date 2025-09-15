@@ -16,7 +16,7 @@ interface TalksPageProps {
 
 export const metadata: Metadata = {
   title: 'Talks',
-  description: `${BLOG_CONFIG.title}의 Talks`,
+  description: `세미나와 발표 경험을 기록하고 공유해요.`,
 }
 
 export default async function TalksPage({ searchParams }: TalksPageProps) {

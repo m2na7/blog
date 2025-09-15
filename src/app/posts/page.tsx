@@ -17,7 +17,7 @@ interface PostsPageProps {
 
 export const metadata: Metadata = {
   title: 'Posts',
-  description: `${BLOG_CONFIG.title}의 Posts`,
+  description: `개발 기술과 경험을 기록하고 공유해요.`,
 }
 
 export default async function PostsPage({ searchParams }: PostsPageProps) {
