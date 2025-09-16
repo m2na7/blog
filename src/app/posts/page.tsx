@@ -8,6 +8,10 @@ import PostListSkeleton from '@/components/skeleton/post-list-skeleton'
 import Title from '@/components/title'
 import { BLOG_CONFIG } from '@/constants/config'
 import { getPaginatedPosts } from '@/lib/posts'
+import {
+  generatePaginatedParams,
+  getCurrentPageFromSearchParams,
+} from '@/utils/pagination'
 
 interface PostsPageProps {
   searchParams: Promise<{
@@ -20,9 +24,13 @@ export const metadata: Metadata = {
   description: `개발 기술과 경험을 기록하고 공유해요.`,
 }
 
+export async function generateStaticParams() {
+  return generatePaginatedParams(getPaginatedPosts, BLOG_CONFIG.postsPerPage)
+}
+
 export default async function PostsPage({ searchParams }: PostsPageProps) {
   const resolvedSearchParams = await searchParams
-  const currentPage = parseInt(resolvedSearchParams.page || '1', 10)
+  const currentPage = getCurrentPageFromSearchParams(resolvedSearchParams)
   const { posts, pagination } = getPaginatedPosts(
     currentPage,
     BLOG_CONFIG.postsPerPage
