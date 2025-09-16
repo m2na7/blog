@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { Calendar, ArrowUpRight, FileText, Play } from 'lucide-react'
+import { Calendar, ArrowUpRight, FileText, Play, MapPin } from 'lucide-react'
 
 import type { TalkSummary } from '@/lib/talks'
 import { cn } from '@/utils/cn'
@@ -39,7 +39,7 @@ export default function TalkList({ talk, className }: TalkListProps) {
 
                 {talk.venue && (
                   <span className="flex items-center">
-                    <span className="mr-1 sm:mr-1.5">📍</span>
+                    <MapPin className="mr-1 h-3 w-3 sm:mr-1.5 sm:h-4 sm:w-4" />
                     <span className="truncate">{talk.venue}</span>
                   </span>
                 )}

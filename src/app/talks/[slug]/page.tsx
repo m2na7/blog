@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 
-import { ExternalLink, Play, FileText, Calendar } from 'lucide-react'
+import { ExternalLink, FileText, Calendar, MapPin } from 'lucide-react'
 import { Metadata } from 'next'
 
 import { MDXContent } from '@/components/mdx-contents'
@@ -76,7 +76,7 @@ export default async function TalkPage({ params }: TalkPageProps) {
           </div>
           {talk.venue && (
             <div className="flex items-center">
-              <span className="mr-1.5">📍</span>
+              <MapPin className="mr-1.5 h-4 w-4" />
               {talk.venue}
             </div>
           )}
