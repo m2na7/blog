@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { ExternalLink, FileText, Calendar, MapPin } from 'lucide-react'
 import { Metadata } from 'next'
 
-import { MDXContent } from '@/components/mdx-contents'
+import { MDXContent } from '@/components/mdx/mdx-contents'
 import Title from '@/components/title'
 import { BLOG_CONFIG } from '@/constants/config'
 import { getAllTalks, getTalkBySlug } from '@/lib/talks'
