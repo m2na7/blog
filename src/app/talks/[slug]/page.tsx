@@ -4,9 +4,10 @@ import { ExternalLink, FileText, Calendar, MapPin } from 'lucide-react'
 import { Metadata } from 'next'
 
 import { MDXContent } from '@/components/mdx/mdx-contents'
+import PostNavigation from '@/components/post-navigation'
 import Title from '@/components/title'
 import { BLOG_CONFIG } from '@/constants/config'
-import { getAllTalks, getTalkBySlug } from '@/lib/talks'
+import { getAllTalks, getTalkBySlug, getAdjacentTalks } from '@/lib/talks'
 import { formatDate } from '@/utils/date'
 
 interface TalkPageProps {
@@ -57,6 +58,8 @@ export default async function TalkPage({ params }: TalkPageProps) {
   if (!talk) {
     notFound()
   }
+
+  const { prevTalk, nextTalk } = getAdjacentTalks(resolvedParams.slug)
 
   return (
     <article className="space-y-8">
@@ -127,6 +130,9 @@ export default async function TalkPage({ params }: TalkPageProps) {
       <div className="prose prose-gray dark:prose-invert max-w-none">
         <MDXContent code={talk.code} />
       </div>
+
+      {/* 이전/다음 발표 네비게이션 */}
+      <PostNavigation prevPost={prevTalk} nextPost={nextTalk} type="talks" />
     </article>
   )
 }

@@ -6,9 +6,10 @@ import { Metadata } from 'next'
 
 import { mdxComponents } from '@/components/mdx/mdx-components'
 import { MDXContent } from '@/components/mdx/mdx-contents'
+import PostNavigation from '@/components/post-navigation'
 import Title from '@/components/title'
 import { BLOG_CONFIG } from '@/constants/config'
-import { getAllPosts, getPostBySlug } from '@/lib/posts'
+import { getAllPosts, getPostBySlug, getAdjacentPosts } from '@/lib/posts'
 import { formatDate } from '@/utils/date'
 
 interface PostPageProps {
@@ -76,6 +77,8 @@ export default async function PostPage({ params }: PostPageProps) {
     notFound()
   }
 
+  const { prevPost, nextPost } = getAdjacentPosts(resolvedParams.slug)
+
   return (
     <article>
       {post.thumbnail && (
@@ -124,6 +127,9 @@ export default async function PostPage({ params }: PostPageProps) {
       <div className="prose prose-slate dark:prose-invert prose-base max-sm:prose-sm max-w-none">
         <MDXContent code={post.code} components={mdxComponents} />
       </div>
+
+      {/* 이전/다음 포스트 네비게이션 */}
+      <PostNavigation prevPost={prevPost} nextPost={nextPost} type="posts" />
     </article>
   )
 }

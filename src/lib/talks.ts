@@ -66,3 +66,23 @@ export function getPaginatedTalks(page: number = 1, pageSize: number = 10) {
     },
   }
 }
+
+/**
+ * 이전/다음 발표 정보를 가져오는 함수
+ * @param currentSlug - 현재 발표 슬러그
+ * @returns 이전/다음 발표 정보
+ */
+export function getAdjacentTalks(currentSlug: string) {
+  const allTalks = getAllTalks()
+  const currentIndex = allTalks.findIndex((talk) => talk.slug === currentSlug)
+
+  if (currentIndex === -1) {
+    return { prevTalk: null, nextTalk: null }
+  }
+
+  return {
+    prevTalk:
+      currentIndex < allTalks.length - 1 ? allTalks[currentIndex + 1] : null,
+    nextTalk: currentIndex > 0 ? allTalks[currentIndex - 1] : null,
+  }
+}

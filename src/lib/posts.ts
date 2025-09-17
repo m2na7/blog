@@ -76,3 +76,23 @@ export function getPaginatedPosts(page: number = 1, pageSize: number = 10) {
     },
   }
 }
+
+/**
+ * 이전/다음 포스트 정보를 가져오는 함수
+ * @param currentSlug - 현재 포스트 슬러그
+ * @returns 이전/다음 포스트 정보
+ */
+export function getAdjacentPosts(currentSlug: string) {
+  const allPosts = getAllPosts()
+  const currentIndex = allPosts.findIndex((post) => post.slug === currentSlug)
+
+  if (currentIndex === -1) {
+    return { prevPost: null, nextPost: null }
+  }
+
+  return {
+    prevPost:
+      currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null,
+    nextPost: currentIndex > 0 ? allPosts[currentIndex - 1] : null,
+  }
+}
