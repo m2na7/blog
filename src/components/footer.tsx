@@ -9,7 +9,7 @@ export default function Footer() {
 
   return (
     <footer className="mt-10">
-      <div className="mx-auto flex max-w-2xl flex-col items-end gap-6 border-t border-gray-200 px-4 py-8 transition-colors duration-200 dark:border-zinc-800">
+      <div className="mx-auto flex max-w-2xl flex-col items-end gap-6 px-4 py-8 transition-colors duration-200">
         <p className="mb-4 text-center text-sm text-gray-600 md:mb-0 md:text-left dark:text-gray-100">
           © {currentYear} {BLOG_CONFIG.author}. All rights reserved.
         </p>

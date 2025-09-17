@@ -9,8 +9,8 @@ import { cn } from '@/utils/cn'
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-2xl items-center justify-between border-b border-gray-200 transition-colors duration-200 max-sm:px-4 dark:border-zinc-800">
+    <header className="sticky top-0 z-50 w-full border-b border-gray-200 backdrop-blur-md dark:border-zinc-800">
+      <div className="mx-auto flex h-16 max-w-2xl items-center justify-between transition-colors duration-200 max-sm:px-4">
         <Link
           href="/"
           className="group relative overflow-hidden text-xl font-bold text-gray-900 max-sm:text-lg dark:text-white"
