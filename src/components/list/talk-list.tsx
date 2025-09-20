@@ -19,12 +19,16 @@ export default function TalkList({ talk, className }: TalkListProps) {
         className
       )}
     >
-      <Link href={`/talks/${talk.slug}`} className="block">
+      <Link
+        href={`/talks/${talk.slug}`}
+        className="block"
+        aria-label={`${talk.title} 발표 상세 보기`}
+      >
         <div className="flex items-start justify-between gap-3 sm:gap-6">
           <div className="min-w-0 flex-1">
-            <h2 className="mb-2 line-clamp-2 text-base font-semibold text-gray-900 transition-colors group-hover:text-blue-600 group-focus:text-blue-600 group-active:text-blue-600 sm:text-lg dark:text-white">
+            <h3 className="mb-2 line-clamp-2 text-base font-semibold text-gray-900 transition-colors group-hover:text-blue-600 group-focus:text-blue-600 group-active:text-blue-600 sm:text-lg dark:text-white">
               {talk.title}
-            </h2>
+            </h3>
 
             <p className="mb-3 line-clamp-2 text-xs text-gray-600 sm:text-sm dark:text-gray-300">
               {talk.description}

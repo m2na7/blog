@@ -14,6 +14,7 @@ export default function Header() {
         <Link
           href="/"
           className="group relative overflow-hidden text-xl font-bold text-gray-900 max-sm:text-lg dark:text-white"
+          aria-label="블로그 홈으로 이동"
         >
           {BLOG_CONFIG.title}
         </Link>
@@ -50,6 +51,7 @@ function NavLink({ item }: { item: NavItem }) {
           ? 'text-blue-600 dark:text-blue-400'
           : 'text-zinc-700 hover:text-zinc-900 focus-visible:text-zinc-900 active:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100 dark:focus-visible:text-zinc-100 dark:active:text-zinc-100'
       )}
+      aria-label={`${item.name} 페이지로 이동`}
     >
       {item.name}
     </Link>

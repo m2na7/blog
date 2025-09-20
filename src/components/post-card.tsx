@@ -32,6 +32,7 @@ export default function PostCard({ post, className }: PostCardProps) {
         'group relative flex-1 overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus:-translate-y-1 focus:shadow-xl active:-translate-y-0.5 active:shadow-lg sm:rounded-3xl dark:bg-zinc-800 dark:shadow-gray-900/20',
         className
       )}
+      aria-labelledby={`post-title-${post.slug}`}
     >
       <Link href={`/posts/${post.slug}`} className="block">
         <div className="relative h-40 overflow-hidden sm:h-48">
@@ -39,7 +40,7 @@ export default function PostCard({ post, className }: PostCardProps) {
             <>
               <Image
                 src={thumbnail}
-                alt={post.title}
+                alt={`${post.title} 포스트 썸네일`}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105 group-focus:scale-105 group-active:scale-102"
               />
@@ -56,7 +57,10 @@ export default function PostCard({ post, className }: PostCardProps) {
 
           <div className="absolute inset-0 flex items-end p-4 sm:p-6">
             <div className="text-white">
-              <h2 className="mb-2 text-lg leading-tight font-bold max-sm:text-base">
+              <h2
+                id={`post-title-${post.slug}`}
+                className="mb-2 text-lg leading-tight font-bold max-sm:text-base"
+              >
                 {post.title}
               </h2>
               <div className="flex flex-col space-y-1 text-xs text-white/90 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-4 sm:text-sm">
@@ -82,9 +86,12 @@ export default function PostCard({ post, className }: PostCardProps) {
 
           <div className="absolute bottom-6 flex items-center text-blue-600 transition-colors group-hover:text-blue-700 group-focus:text-blue-700 group-active:text-blue-800 max-sm:bottom-4 dark:text-blue-400 dark:group-focus:text-blue-300 dark:group-active:text-blue-500">
             <span className="mr-1 text-sm font-medium max-sm:text-xs">
-              더 읽기
+              <span className="sr-only">{post.title} 포스트 </span>더 읽기
             </span>
-            <ChevronRight className="h-4 w-4 max-sm:h-3 max-sm:w-3" />
+            <ChevronRight
+              className="h-4 w-4 max-sm:h-3 max-sm:w-3"
+              aria-hidden="true"
+            />
           </div>
         </div>
       </Link>

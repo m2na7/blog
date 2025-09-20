@@ -54,6 +54,7 @@ function AboutMeSection() {
               href="https://github.com/TanStack/query/pulls?q=author%3Am2na7+is%3Aclosed"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="TanStack Query Pull Request list"
             >
               query
             </a>
@@ -62,6 +63,7 @@ function AboutMeSection() {
               href="https://github.com/TanStack/form/pulls?q=author%3Am2na7+is%3Aclosed"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="TanStack Form Pull Request list"
             >
               form
             </a>
@@ -73,6 +75,7 @@ function AboutMeSection() {
               href="https://github.com/toss/suspensive/pulls?q=author%3Am2na7+is%3Aclosed"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Toss Suspensive Pull Request list"
             >
               suspensive
             </a>
@@ -81,6 +84,7 @@ function AboutMeSection() {
               href="https://github.com/toss/react-simplikit/pulls?q=author%3Am2na7+is%3Aclosed"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Toss React-Simplikit Pull Request list"
             >
               react-simplikit
             </a>
@@ -92,6 +96,7 @@ function AboutMeSection() {
               href="https://github.com/react-hook-form/react-hook-form/pulls?q=author%3Am2na7+is%3Aclosed"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="React Hook Form Pull Request list"
             >
               react-hook-form
             </a>
@@ -108,14 +113,15 @@ function RecentPostSection({ recentPosts }: { recentPosts: PostSummary[] }) {
       <div className="mb-6 flex flex-row items-center justify-between space-y-0">
         <div className="space-y-3">
           <Title size="md">Recent Posts</Title>
-          <p className="text-[15px] text-zinc-600 max-sm:text-sm dark:text-zinc-300">
+          <h2 className="text-[15px] text-zinc-600 max-sm:text-sm dark:text-zinc-300">
             최근에 공유된 포스트들을 확인해보세요.
-          </p>
+          </h2>
         </div>
 
         <Link
           href="/posts"
           className="group mt-8 flex w-fit items-center space-x-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-all focus:bg-gray-50 active:bg-gray-100 max-sm:px-3 max-sm:text-xs md:hover:bg-gray-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-gray-300 dark:focus:bg-zinc-700 dark:active:bg-zinc-600 dark:md:hover:bg-zinc-700"
+          aria-label="포스트 전체 보기"
         >
           <span>전체 보기</span>
           <span className="transition-transform group-hover:translate-x-1">

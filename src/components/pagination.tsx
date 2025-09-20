@@ -54,6 +54,7 @@ export default function Pagination({
       <div className="flex items-center gap-1">
         <Link
           href={currentPage > 1 ? `${basePath}?page=${currentPage - 1}` : '#'}
+          aria-label="이전 페이지"
           className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors ${
             currentPage > 1
               ? 'text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800'
@@ -92,6 +93,7 @@ export default function Pagination({
             <Link
               key={page}
               href={`${basePath}?page=${page}`}
+              aria-label={`${page}페이지로 이동`}
               className="flex h-9 w-9 items-center justify-center rounded-lg text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-zinc-800 dark:hover:text-gray-100"
             >
               {page}
@@ -105,6 +107,7 @@ export default function Pagination({
               ? `${basePath}?page=${currentPage + 1}`
               : '#'
           }
+          aria-label="다음 페이지"
           className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors ${
             currentPage < totalPages
               ? 'text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-zinc-800'
