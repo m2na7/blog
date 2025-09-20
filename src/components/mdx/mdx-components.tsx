@@ -11,7 +11,7 @@ export const mdxComponents: MDXComponents = {
         className="mb-3 text-3xl font-bold text-gray-900 max-sm:mb-2 max-sm:text-2xl dark:text-white"
         {...props}
       />
-      <hr className="border-gray-200 dark:border-gray-700" />
+      <hr className="border-gray-200 transition-colors duration-200 dark:border-gray-700" />
     </div>
   ),
   h2: (props) => (
@@ -20,7 +20,7 @@ export const mdxComponents: MDXComponents = {
         className="mb-3 text-2xl font-bold text-gray-900 max-sm:mb-2 max-sm:text-xl dark:text-white"
         {...props}
       />
-      <hr className="border-gray-200 dark:border-gray-700" />
+      <hr className="border-gray-200 transition-colors duration-200 dark:border-gray-700" />
     </div>
   ),
   h3: (props) => (

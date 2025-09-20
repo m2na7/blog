@@ -9,7 +9,7 @@ import { cn } from '@/utils/cn'
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200 backdrop-blur-md dark:border-zinc-800">
+    <header className="sticky top-0 z-50 w-full border-b border-gray-200 backdrop-blur-md transition-colors duration-200 dark:border-zinc-800">
       <div className="mx-auto flex h-16 max-w-2xl items-center justify-between transition-colors duration-200 max-sm:px-4">
         <Link
           href="/"

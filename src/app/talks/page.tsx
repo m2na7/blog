@@ -40,7 +40,7 @@ export default async function TalksPage({ searchParams }: TalksPageProps) {
     <div>
       <header className="mb-2 space-y-2">
         <Title size="lg">Talks</Title>
-        <h2 className="text-zinc-600 max-sm:text-sm dark:text-zinc-300">
+        <h2 className="text-[15px] text-zinc-600 max-sm:text-sm dark:text-zinc-300">
           외부 발표 경험을 기록하고 공유해요.
         </h2>
       </header>

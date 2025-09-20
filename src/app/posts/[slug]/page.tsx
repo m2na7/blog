@@ -97,7 +97,7 @@ export default async function PostPage({ params }: PostPageProps) {
         )}
 
         {/* 포스트 헤더 */}
-        <header className="mt-2 mb-8 space-y-6 border-b border-gray-200 pb-8 max-sm:space-y-4 max-sm:pb-6 dark:border-zinc-600">
+        <header className="mt-2 mb-8 space-y-6 border-b border-gray-200 pb-8 transition-colors duration-200 max-sm:space-y-4 max-sm:pb-6 dark:border-zinc-600">
           <div className="space-y-6 max-sm:space-y-4">
             <Title size="xl">{post.title}</Title>
 

@@ -22,7 +22,7 @@ export default function HomePage() {
 
 function AboutMeSection() {
   return (
-    <section className="space-y-8 border-b border-gray-200 pb-8 dark:border-zinc-700">
+    <section className="space-y-8 border-b border-gray-200 pb-8 transition-colors duration-200 dark:border-zinc-700">
       <Image
         src="/assets/m2na_profile.png"
         alt="profile"
@@ -31,7 +31,7 @@ function AboutMeSection() {
         className="rounded-full object-cover"
       />
 
-      <div className="space-y-6 text-[15px] leading-relaxed">
+      <div className="space-y-6 text-sm leading-relaxed">
         <p>Frontend Engineer 강민하입니다. 👋 </p>
         <div className="space-y-1">
           <p>
@@ -108,7 +108,7 @@ function RecentPostSection({ recentPosts }: { recentPosts: PostSummary[] }) {
       <div className="mb-6 flex flex-row items-center justify-between space-y-0">
         <div className="space-y-3">
           <Title size="md">Recent Posts</Title>
-          <p className="text-zinc-600 max-sm:text-sm dark:text-zinc-300">
+          <p className="text-[15px] text-zinc-600 max-sm:text-sm dark:text-zinc-300">
             최근에 공유된 포스트들을 확인해보세요.
           </p>
         </div>

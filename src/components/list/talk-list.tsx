@@ -33,13 +33,13 @@ export default function TalkList({ talk, className }: TalkListProps) {
             <div className="flex flex-col space-y-2 text-xs text-gray-500 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-6 sm:text-sm dark:text-gray-400">
               <div className="flex items-center space-x-3 sm:space-x-4">
                 <time dateTime={talk.date} className="flex items-center">
-                  <Calendar className="mr-1 h-3 w-3 sm:mr-1.5 sm:h-4 sm:w-4" />
+                  <Calendar className="mr-1.5 h-3.5 w-3.5 max-sm:mr-1 max-sm:h-3 max-sm:w-3" />
                   {formatDate(talk.date)}
                 </time>
 
                 {talk.venue && (
                   <span className="flex items-center">
-                    <MapPin className="mr-1 h-3 w-3 sm:mr-1.5 sm:h-4 sm:w-4" />
+                    <MapPin className="mr-1.5 h-3.5 w-3.5 max-sm:mr-1 max-sm:h-3 max-sm:w-3" />
                     <span className="truncate">{talk.venue}</span>
                   </span>
                 )}

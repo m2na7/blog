@@ -35,19 +35,19 @@ export default function PostList({ post, className }: PostListProps) {
             </div>
 
             <div className="min-w-0 flex-1">
-              <h2 className="mt-1 mb-2 line-clamp-2 text-lg font-semibold text-gray-900 transition-colors group-focus:text-blue-600 group-active:text-blue-600 max-sm:text-base md:group-hover:text-blue-600 dark:text-white">
+              <h2 className="mt-1 mb-2 line-clamp-2 text-[17px] font-semibold text-gray-900 transition-colors group-focus:text-blue-600 group-active:text-blue-600 max-sm:text-base md:group-hover:text-blue-600 dark:text-white">
                 {post.title}
               </h2>
 
               <div className="flex items-center space-x-6 text-sm text-gray-500 max-sm:text-xs dark:text-gray-400">
                 <time dateTime={post.date} className="flex items-center">
-                  <Calendar className="mr-1.5 h-4 w-4 max-sm:mr-1 max-sm:h-3 max-sm:w-3" />
+                  <Calendar className="mr-1 h-3.5 w-3.5 max-sm:h-3 max-sm:w-3" />
                   {formatDate(post.date)}
                 </time>
 
                 {post.readingTimeText && (
                   <span className="flex items-center">
-                    <Clock className="mr-1.5 h-4 w-4 max-sm:mr-1 max-sm:h-3 max-sm:w-3" />
+                    <Clock className="mr-1 h-3.5 w-3.5 max-sm:h-3 max-sm:w-3" />
                     {post.readingTimeText}
                   </span>
                 )}
