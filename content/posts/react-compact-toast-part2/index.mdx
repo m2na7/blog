@@ -107,6 +107,11 @@ export default defineConfig([
 ])
 ```
 
+> **2025년 8월 이후 tsup은 더이상 적극적으로 유지보수하지 않는다고 선언했어요.**  
+>
+> 현재 react-compact-toast는 tsup대신 **tsdown**을 사용해 번들 크기를 최적화했어요.  
+> 자세한 내용은 다음 포스트에서 추가적으로 확인 가능해요!  
+
 ## 4. 번들 크기 최적화
 
 이제 해결해야 하는 중요한 문제는 **번들 크기 최적화**예요.  
@@ -167,9 +172,9 @@ import { toast } from 'react-compact-toast'
 Named export 구조 덕분에 사용자는 정말 필요한 코드만 선택적으로 import할 수 있어요.  
 하지만, Named export만 있다고 해서 tree-shaking이 자동으로 되는 것은 아니에요.
 
-> **tsup을 사용한다면?**
+> **tsup, tsdown을 사용한다면?**
 
-tsup은 기본적으로 사용되지 않는 코드(ex. `eventManager`)를 최종 번들에서 제거해요. (Tree-shaking 기본 적용)
+tsup과 tsdown은 기본적으로 사용되지 않는 코드(ex. `eventManager`)를 최종 번들에서 제거해요. (Tree-shaking 기본 적용)
 
 즉, **Named export + tsup**을 함께 쓰면,
 사용자가 `toast`만 import했을 때 최종 번들에는 `toast` 관련 코드만 포함되고 나머지는 제거돼요.
@@ -194,7 +199,8 @@ webpack-bundle-analyzer를 사용해 번들 크기를 확인해보니,
 
 ![rct_bundle](./assets/rct_bundle.webp)
 
-> **처음 목표였던 2배 보다 더 가벼운 번들 크기를 달성했어요!**
+> **9월 21일 기준 react-compact-toast는 약 1.6KB까지 번들 크기를 최적화했어요.**  
+> 자세한 내용은 다음 포스트에서 추가적으로 확인 가능해요!
 
 최종적으로 비교를 해보면 다음과 같아요.
 
@@ -230,7 +236,7 @@ webpack-bundle-analyzer를 사용해 번들 크기를 확인해보니,
         <strong>react-compact-toast</strong>
       </td>
       <td>
-        <strong>2.1KB</strong>
+        <strong>1.6KB</strong>
       </td>
     </tr>
   </tbody>
