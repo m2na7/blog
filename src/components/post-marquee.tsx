@@ -9,7 +9,7 @@ interface PostMarqueeProps {
   posts: PostSummary[]
 }
 
-const CompactPostCard = ({ post }: { post: PostSummary }) => {
+const PostCard = ({ post }: { post: PostSummary }) => {
   const thumbnail = (post as any).thumbnail
 
   return (
@@ -62,7 +62,7 @@ export function PostMarquee({ posts }: PostMarqueeProps) {
         className="[--duration:40s] [--gap:1rem] max-sm:[--duration:35s] max-sm:[--gap:0.75rem]"
       >
         {firstRow.map((post) => (
-          <CompactPostCard key={post.slug} post={post} />
+          <PostCard key={post.slug} post={post} />
         ))}
       </Marquee>
       <Marquee
@@ -71,7 +71,7 @@ export function PostMarquee({ posts }: PostMarqueeProps) {
         className="mt-2 [--duration:40s] [--gap:1rem] max-sm:[--duration:35s] max-sm:[--gap:0.75rem]"
       >
         {secondRow.map((post) => (
-          <CompactPostCard key={post.slug} post={post} />
+          <PostCard key={post.slug} post={post} />
         ))}
       </Marquee>
       <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white to-transparent max-sm:w-16 dark:from-zinc-900"></div>
