@@ -2,22 +2,24 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { IntroDock } from '@/components/intro-dock'
-import PostCard from '@/components/post-card'
+import { PostMarquee } from '@/components/post-marquee'
 import Title from '@/components/title'
 import { getAllPosts } from '@/lib/posts'
 import type { PostSummary } from '@/lib/posts'
 
 export default function HomePage() {
   const allPosts = getAllPosts()
-  const recentPosts = allPosts.slice(0, 2)
+  const recentPosts = allPosts.slice(0, 12)
 
   return (
-    <div className="space-y-12 max-sm:space-y-8">
-      <AboutMeSection />
-      {recentPosts.length > 0 && (
-        <RecentPostSection recentPosts={recentPosts} />
-      )}
-    </div>
+    <>
+      <div className="space-y-12 max-sm:space-y-8">
+        <AboutMeSection />
+        {recentPosts.length > 0 && (
+          <RecentPostSection recentPosts={recentPosts} />
+        )}
+      </div>
+    </>
   )
 }
 
@@ -134,10 +136,8 @@ function RecentPostSection({ recentPosts }: { recentPosts: PostSummary[] }) {
         </Link>
       </div>
 
-      <div className="flex gap-8 max-sm:flex-col">
-        {recentPosts.map((post) => (
-          <PostCard key={post.slug} post={post} />
-        ))}
+      <div className="mr-[calc(-50vw+50%)] ml-[calc(-50vw+50%)]">
+        <PostMarquee posts={recentPosts} />
       </div>
     </section>
   )
