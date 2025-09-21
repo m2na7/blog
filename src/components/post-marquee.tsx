@@ -26,10 +26,11 @@ const CompactPostCard = ({ post }: { post: PostSummary }) => {
             src={thumbnail}
             alt={`${post.title} 썸네일`}
             fill
-            className="object-cover transition-all duration-300 hover:blur-sm"
+            className="pointer-events-none object-cover transition-all duration-300 select-none hover:blur-sm"
+            draggable={false}
           />
         ) : (
-          <div className="h-full w-full bg-gradient-to-br from-gray-400 to-gray-600 transition-all duration-300 hover:blur-sm" />
+          <div className="h-full w-full bg-gradient-to-br from-gray-400 to-gray-600 transition-all duration-300 select-none hover:blur-sm" />
         )}
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
@@ -40,7 +41,7 @@ const CompactPostCard = ({ post }: { post: PostSummary }) => {
           </h3>
         </div>
 
-        <div className="absolute inset-0 flex items-center bg-black/70 p-4 opacity-0 transition-opacity duration-300 hover:opacity-100 max-sm:p-3 dark:bg-black/80">
+        <div className="absolute inset-0 flex items-center bg-black/70 p-4 opacity-0 transition-opacity duration-300 hover:opacity-100 active:opacity-100 max-sm:p-3 dark:bg-black/80">
           <p className="text-center text-sm font-medium text-white/95 max-sm:text-xs max-sm:leading-relaxed">
             {post.description || post.excerpt}
           </p>

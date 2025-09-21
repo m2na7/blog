@@ -1,8 +1,7 @@
 import Link from 'next/link'
 
-import { Github, Linkedin } from 'lucide-react'
-
 import { BLOG_CONFIG } from '@/constants/config'
+import { Icons } from '@/lib/icons'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -23,7 +22,7 @@ export default function Footer() {
               className="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-100 dark:hover:text-white"
               aria-label="GitHub"
             >
-              <Github className="h-5 w-5" />
+              <Icons.github className="h-5 w-5" />
             </Link>
           )}
 
@@ -35,7 +34,7 @@ export default function Footer() {
               className="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-100 dark:hover:text-white"
               aria-label="LinkedIn"
             >
-              <Linkedin className="h-5 w-5" />
+              <Icons.linkedin className="h-5 w-5" />
             </Link>
           )}
         </div>
