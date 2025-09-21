@@ -11,6 +11,7 @@ export const BLOG_CONFIG = {
   social: {
     github: 'https://github.com/m2na7',
     linkedin: 'https://linkedin.com/in/m2na',
+    email: 'mailto:minha3082@naver.com',
   },
 
   navigation: [

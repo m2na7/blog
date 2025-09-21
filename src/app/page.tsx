@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { IntroDock } from '@/components/intro-dock'
 import PostCard from '@/components/post-card'
 import Title from '@/components/title'
 import { getAllPosts } from '@/lib/posts'
@@ -23,14 +24,15 @@ export default function HomePage() {
 function AboutMeSection() {
   return (
     <section className="space-y-8 border-b border-gray-200 pb-8 transition-colors duration-200 dark:border-zinc-700">
-      <Image
-        src="/assets/m2na_profile.png"
-        alt="profile"
-        width={120}
-        height={120}
-        className="rounded-full object-cover"
-      />
-
+      <div className="flex">
+        <Image
+          src="/assets/m2na_profile.png"
+          alt="profile"
+          width={120}
+          height={120}
+          className="rounded-full object-cover"
+        />
+      </div>
       <div className="space-y-6 text-sm leading-relaxed">
         <p>Frontend Engineer 강민하입니다. 👋 </p>
         <div className="space-y-1">
@@ -103,6 +105,8 @@ function AboutMeSection() {
           </li>
         </ul>
       </div>
+
+      <IntroDock />
     </section>
   )
 }
