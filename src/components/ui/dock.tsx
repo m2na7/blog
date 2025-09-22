@@ -12,6 +12,7 @@ import {
 } from 'motion/react'
 import type { MotionProps } from 'motion/react'
 
+import { useKeyboard } from '@/hooks/use-keyboard'
 import { cn } from '@/utils/cn'
 
 export interface DockProps extends VariantProps<typeof dockVariants> {
@@ -133,15 +134,36 @@ const DockIcon = ({
     damping: 12,
   })
 
+  const handleClick = () => {
+    const clickableElement = ref.current?.querySelector(
+      'a, button'
+    ) as HTMLElement
+    if (clickableElement) {
+      clickableElement.click()
+    }
+  }
+
+  const { keyboardProps } = useKeyboard({
+    onKeyDown: (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        handleClick()
+      }
+    },
+  })
+
   return (
     <motion.div
       ref={ref}
       style={{ width: scaleSize, height: scaleSize, padding }}
       className={cn(
-        'flex aspect-square cursor-pointer items-center justify-center rounded-full',
+        'flex aspect-square cursor-pointer items-center justify-center rounded-full focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none',
         disableMagnification && 'hover:bg-muted-foreground transition-colors',
         className
       )}
+      role="button"
+      tabIndex={0}
+      {...keyboardProps}
       {...props}
     >
       <div>{children}</div>
