@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 
 import Footer from '@/components/footer'
+import GoogleAnalytics from '@/components/google-analytics'
 import Header from '@/components/header'
 import { BLOG_CONFIG } from '@/constants/config'
 
@@ -54,6 +55,7 @@ export default function RootLayout({
             <Footer />
           </div>
         </ThemeProvider>
+        <GoogleAnalytics />
         <Analytics />
       </body>
     </html>
