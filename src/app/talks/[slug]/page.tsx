@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { ExternalLink, FileText, Calendar, MapPin } from 'lucide-react'
 import { Metadata } from 'next'
 
+import { mdxComponents } from '@/components/mdx/mdx-components'
 import { MDXContent } from '@/components/mdx/mdx-contents'
 import PostNavigation from '@/components/post-navigation'
 import Title from '@/components/title'
@@ -128,7 +129,7 @@ export default async function TalkPage({ params }: TalkPageProps) {
       )}
 
       <div className="prose prose-gray dark:prose-invert max-w-none">
-        <MDXContent code={talk.code} />
+        <MDXContent code={talk.code} components={mdxComponents} />
       </div>
 
       {/* 이전/다음 발표 네비게이션 */}

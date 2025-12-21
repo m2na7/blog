@@ -92,7 +92,7 @@ export const mdxComponents: MDXComponents = {
         alt={alt || ''}
         width={672}
         height={400}
-        className="my-1 w-full rounded-lg"
+        className="my-6 w-full rounded-lg max-sm:my-4"
         {...props}
       />
     )
