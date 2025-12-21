@@ -1,5 +1,6 @@
 import { type ReactNode } from 'react'
 
+import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 
@@ -53,6 +54,7 @@ export default function RootLayout({
             <Footer />
           </div>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
