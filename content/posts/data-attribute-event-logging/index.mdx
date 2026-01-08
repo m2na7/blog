@@ -1,0 +1,304 @@
+---
+title: 'Data Attribute 기반 이벤트 로깅 시스템 구축하기'
+description: '선언적 방식으로 사용자 이벤트를 수집하며 비즈니스 로직과 이벤트 수집 로직을 최대한 분리했던 경험을 공유해요.'
+author: 강민하
+date: '2025-12-27'
+slug: 'data-attribute-event-logging'
+thumbnail: './assets/thumbnail.webp'
+---
+
+{/* ![thumbnail](./assets/thumbnail.webp) */}
+
+> FE에서 사용자 행동 분석을 위해 이벤트 로깅을 붙이다 보면,
+> 어느 순간 비즈니스 로직과 분석 코드가 뒤섞여 복잡해진 경험이 있으신가요?
+>
+> 무분별한 데이터 로깅은 버튼 클릭, 페이지 이동 같은 단순한 UI 로직 안에
+> 이벤트 수집을 위한 코드가 함께 들어가면서
+> 코드의 역할이 점점 불분명해지는 순간이 찾아올 수 있어요.
+
+프로젝트에서 사용자 행동 분석을 위해 Amplitude를 사용중인데, 초기에는 모든 이벤트 핸들러 내부에 `trackEvent()`를 직접 호출하는 방식으로 구현했어요.
+
+하지만 프로젝트가 커지면서 문제가 생겼어요. 비즈니스 로직과 로깅 코드가 섞여 코드가 복잡해지고, 이벤트 추적을 추가하거나 수정할 때마다 여러 파일을 수정해야 했죠.
+
+이를 개선하기 위해 **Data Attribute 기반의 선언적 이벤트 수집 방식**을 도입했어요.
+
+결과적으로 비즈니스 로직과 분석 로직을 깔끔하게 분리하여 코드의 가독성과 유지보수성을 크게 향상시킬 수 있었어요.
+
+이번 글에서는 데이터 로깅이 무엇인지부터 시작해, 기존 방식의 문제점과 다양한 개선 시도, 그리고 Data Attribute를 활용한 최종 해결책까지 단계적으로 정리해보려고 해요.
+
+## 1. 데이터 수집, 로깅이란?
+
+사용자와 서비스간의 문제를 풀어가기 위해서는 **데이터 기반 의사결정**이 필수적이에요.
+
+사용자가 어떤 버튼을 클릭했는지, 어떤 페이지를 방문했는지, 어떤 기능을 자주 사용하는지 등의 데이터를 수집하고 분석해야 더 나은 서비스를 만들 수 있거든요.
+
+**이벤트 로깅(Event Logging)** 은 이런 사용자 행동 데이터를 수집하는 과정을 말해요.
+
+```tsx
+// 예시: 사용자가 "저장" 버튼을 클릭했다는 이벤트를 기록
+trackEvent('button_click', {
+  button_name: 'save',
+  page: 'profile',
+  user_id: 123,
+})
+```
+
+Google Analytics, Amplitude, Mixpanel 같은 분석 도구들이 이런 이벤트 데이터를 수집하고 시각화해주죠.
+
+하지만 여기서 중요한 점이 있어요.
+
+**이벤트 로깅 코드가 비즈니스 로직을 해치면 안 된다는 거예요.**
+
+사용자에게 실제로 가치를 제공하는 핵심 기능(저장, 삭제, 수정 등)과 데이터 수집을 위한 로깅 코드는 목적이 다르기 때문에 섞이면 코드가 복잡해지고 유지보수가 어려워져요.
+
+## 2. 다양한 데이터 수집 방식
+
+### 1) 핸들러 내부에 직접 작성
+
+가장 직관적인 방식이에요. 각 이벤트 핸들러 내부에 트래킹 코드를 직접 작성하는 거죠.(명령형)
+
+**그리고 실제 기존 프로젝트에서는 이렇게 구현되어 있었어요.**
+
+```tsx
+const handleSave = () => {
+  trackEvent('click_save_button', { user_id: 123 }) // 로깅 코드
+  saveData() // 비즈니스 로직
+}
+
+const handleDelete = () => {
+  trackEvent('click_delete_button', { user_id: 123 })
+  deleteData()
+}
+
+const handleCancel = () => {
+  trackEvent('click_cancel_button', { user_id: 123 })
+  closeModal()
+}
+```
+
+처음에는 간단해 보였지만, 프로젝트가 커지면서 다음과 같은 문제들이 발생했어요.
+
+**문제점**
+
+- 비즈니스 로직과 분석 로직이 섞여있음
+- 모든 핸들러마다 트래킹 코드를 추가해야 함
+- 이벤트 속성을 변경하려면 수십 개의 파일을 찾아 수정해야 함
+- 어떤 버튼에 로깅이 설정되어 있는지 파악하기 어려움
+- 실수로 로깅 코드를 누락하기 쉬움
+
+**이런 문제들을 해결하기 위해 이벤트 로깅을 위한 다른 방법은 없을까 고민해보았어요.**
+
+### 2) Wrapper 컴포넌트 방식
+
+로깅 로직을 컴포넌트로 분리하는 방법이에요.
+
+```tsx
+const Logging = ({ eventName, children }) => {
+  const handleClick = () => {
+    trackEvent(eventName)
+  }
+
+  return <div onClick={handleClick}>{children}</div>
+}
+
+<Logging eventName="click_save_button">
+  <Button onClick={saveData}>저장</Button>
+</Logging>
+```
+
+분명 추상화된 컴포넌트를 활용해 로깅 로직을 분리했지만, <br/>
+이 조차도 매번 해당 컴포넌트를 import해줘야하고, DOM 노드 depth가 깊어져서 어딘가 명쾌하지 않은 느낌이 들었어요.<br/>
+저는 어떠한 컴포넌트를 보았을 때, 이벤트 로깅 로직은 최대한 겉으로 드러나지 않기를 원했어요.
+
+## 3. 조금 더 선언적으로 처리해볼 수 없을까?
+
+앞서 본 방식들은 모두 **JavaScript 코드에서** 로깅을 처리했어요.
+
+하지만 정말 선언적으로 처리하려면 **마크업(HTML)에서 명시**하는 게 이상적이라고 생각했어요.
+
+```tsx
+// 이렇게 HTML 속성으로 선언할 수 있다면?
+<Button onClick={saveData} data-track-event="click_save_button">
+  저장
+</Button>
+```
+
+마크업을 보는 것만으로도 "이 버튼은 저장 기능을 하고, 클릭 이벤트를 추적한다"는 것이 명확하게 드러나죠.
+
+## 4. Data Attribute를 활용해보자
+
+`data-*` 속성은 HTML5에서 도입된 사용자 정의 속성이에요.
+
+다들 보통 CSS 스타일링이나 JavaScript에서 요소를 식별하는 용도로 많이(?) 사용해봤을거라 생각해요.
+
+```html
+<!-- HTML -->
+<button data-state="active">활성</button>
+<button data-state="disabled">비활성</button>
+```
+
+```css
+/* CSS에서 활용 */
+button[data-state='active'] {
+  background: green;
+  color: white;
+}
+
+button[data-state='disabled'] {
+  background: gray;
+  cursor: not-allowed;
+}
+```
+
+이런 Data Attribute를 **이벤트 로깅에 활용**하면 어떨까요?
+
+## 5. 이벤트 버블링을 활용한 전역 리스너
+
+Data Attribute를 사용하면
+**각 요소가 어떤 이벤트를 발생시켜야 하는지 HTML 단계에서 선언**할 수 있어요.
+
+```tsx
+// 이렇게 !
+<Button data-track-event="click_save_button">
+  저장
+</Button>
+```
+
+하지만 여기서 한 가지 고민이 생겨요.
+
+이 이벤트들을 어떻게 효율적으로 수집하고 로깅할 수 있을까요?
+
+모든 버튼이나 링크마다 `addEventListener`를 직접 붙이는 방식은
+- 코드가 분산되고
+- 동적으로 추가되는 요소를 놓치기 쉽고
+- 유지보수 비용이 커질 수 있어요.
+
+이 문제를 해결하기 위해 사용할 수 있는 패턴이
+바로 **이벤트 버블링(Event Bubbling)을 활용한 전역 리스너**예요.
+
+**이벤트 버블링**이란 DOM 트리에서 자식 요소에서 발생한 이벤트가 부모 요소로 전파되는 현상을 말해요.
+
+```tsx
+<div>                    ← 3. 마지막 도착
+  <button>               ← 2. 버블링
+    <span>클릭</span>    ← 1. 클릭 발생
+  </button>
+</div>
+```
+
+이 특성을 활용하면 **최상위(document)에 하나의 리스너만 등록**해도 모든 클릭 이벤트를 감지할 수 있어요.
+
+```tsx
+document.addEventListener('click', (event) => {
+  const target = event.target
+
+  // data-track-event 속성이 있는지 확인
+  if (target.hasAttribute('data-track-event')) {
+    const eventName = target.getAttribute('data-track-event')
+    trackEvent(eventName)
+  }
+})
+```
+
+이 방식의 장점은
+
+- 모든 버튼에 개별 리스너를 달 필요가 없음
+- 동적으로 추가되는 요소도 자동으로 추적됨
+
+## 6. 실제 구현
+
+이제 이 모든 개념을 조합해서 실제로 구현했던 내용을 조금 살펴볼게요.
+
+### 전역 이벤트 리스너 설정
+
+React에서는 Provider 컴포넌트를 만들어 앱 최상위에 배치하면 돼요.
+
+```tsx
+export const AmplitudeProvider = () => {
+  useEffect(() => {
+    const handleClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement
+
+      // closest로 상위 요소까지 탐색
+      const element = target.closest('[data-amplitude-event]')
+      if (!element) return
+
+      // 이벤트 이름과 속성 추출
+      const eventName = element.getAttribute('data-amplitude-event')
+      const properties = extractProperties(element)
+
+      // Amplitude로 전송
+      trackEvent(eventName, properties)
+    }
+
+    document.addEventListener('click', handleClick)
+    return () => document.removeEventListener('click', handleClick)
+  }, [])
+
+  return null
+}
+```
+
+- `closest()`: 클릭된 요소뿐만 아니라 상위 요소까지 탐색 (버튼 안의 아이콘을 클릭해도 동작)
+- 전역 리스너 하나로 모든 클릭 추적
+- 컴포넌트 언마운트 시 리스너 정리
+
+### 이벤트 네이밍 컨벤션 및 중앙 관리
+
+추가로 타입 안전성을 위해 이벤트 이름을 상수로 관리했어요.
+그리고 이벤트 네이밍의 컨벤션 또한 체계적으로 정의했어요.
+
+
+실제 서비스에서는 더 많은 규칙이 있지만, 핵심 원칙만 정리하면 다음과 같아요.
+
+- 행동대상(환경) 형태를 기본으로 한다.
+- 이벤트의 의미가 드러나도록 행동(action) 중심으로 설계한다.
+- ...
+
+
+```tsx
+export const TRACK_EVENTS = {
+  POST: {
+    LIST: {
+      VIEW: "view_post_list",
+    },
+    LIKE: {
+      CLICK: "click_like_post",
+      COMPLETE: "complete_like_post",
+    },
+    COMMENT: {
+      CLICK: "click_comment_post",
+      COMPLETE: "complete_comment_post",
+    },
+    DELETE: {
+      CLICK: "click_delete_post",
+      COMPLETE: "complete_delete_post",
+    },
+  },
+} as const;
+```
+
+## 7. 마무리로
+
+실제 Data Attribute를 활용한 이벤트 수집 코드를 보면
+
+```tsx
+<Button
+  onClick={saveData}
+  data-amplitude-event={TRACK_EVENTS.POST.LIST.VIEW}
+>
+  저장
+</Button>
+```
+
+핸들러(`saveData`)는 순수하게 비즈니스 로직만 담고 있고, 이벤트 추적은 속성으로 선언되어 있어요.
+드디어 비즈니스 로직과 분석 로직이 명확하게 분리되어, 각각의 코드를 독립적으로 수정할 수 있게 됐어요.
+
+또한 은근한(?)장점으로는 개발자 도구에서 요소를 선택하면 어떤 이벤트가 설정되어 있는지 바로 확인할 수 있어요.
+기존에는 코드를 일일이 찾아봐야 했지만, 이제는 Elements 탭에서 `data-amplitude-*` 속성만 확인하면 돼요.
+
+> 그리고! 또 다른 방법도 있어요. (물론 당연히 엄청 많이 있겠지만)
+>
+> 바로 Transpiler와 이벤트 캡처링을 활용하는 방법입니다..!
+> 이 글을 읽고 다른 방법은 없을까? 고민이 됐다면 https://toss.tech/article/27750 이 아티클도 한 번 읽어보시면 좋을 것 같아요. 😀
+
