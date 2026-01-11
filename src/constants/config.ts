@@ -17,6 +17,7 @@ export const BLOG_CONFIG = {
   navigation: [
     { name: 'Posts', href: '/posts' },
     { name: 'Talks', href: '/talks' },
+    { name: 'Notes', href: '/notes' },
   ],
 } as const
 

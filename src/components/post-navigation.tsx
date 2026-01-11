@@ -12,7 +12,7 @@ interface NavigationItem {
 interface PostNavigationProps {
   prevPost?: NavigationItem | null
   nextPost?: NavigationItem | null
-  type?: 'posts' | 'talks'
+  type?: 'posts' | 'talks' | 'notes'
 }
 
 export default function PostNavigation({

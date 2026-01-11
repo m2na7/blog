@@ -108,5 +108,27 @@ export default defineConfig({
           permalink: `/talks/${data.slug}`,
         })),
     },
+    notes: {
+      name: 'Note',
+      pattern: 'notes/**/index.mdx',
+      schema: s
+        .object({
+          title: s.string().max(99),
+          date: s.isodate(),
+          description: s.string().max(999),
+          draft: s.boolean().default(false),
+          thumbnail: s.image().optional(),
+          slug: s.slug('notes'),
+          metadata: s.metadata(),
+          excerpt: s.excerpt(),
+          content: s.markdown(),
+          code: s.mdx(),
+        })
+        .transform((data) => ({
+          ...data,
+          permalink: `/notes/${data.slug}`,
+          readingTime: getReadingTime(data.content),
+        })),
+    },
   },
 })
