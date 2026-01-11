@@ -33,6 +33,7 @@ function AboutMeSection() {
           width={120}
           height={120}
           className="rounded-full object-cover"
+          quality={100}
         />
       </div>
       <div className="space-y-6 text-sm leading-relaxed">

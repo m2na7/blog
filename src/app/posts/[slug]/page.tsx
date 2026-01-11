@@ -92,6 +92,7 @@ export default async function PostPage({ params }: PostPageProps) {
               fill
               className="rounded-2xl object-cover"
               blurDataURL={post.thumbnail.blurDataURL}
+              quality={100}
             />
           </div>
         )}
