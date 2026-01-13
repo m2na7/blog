@@ -21,9 +21,6 @@ export const metadata: Metadata = {
   description: `개인적인 회고와 생각을 기록하고 공유해요.`,
 }
 
-export const dynamic = 'force-static'
-export const dynamicParams = true
-
 export async function generateStaticParams() {
   return generatePaginatedParams(getPaginatedNotes, BLOG_CONFIG.postsPerPage)
 }
